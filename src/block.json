@@ -1,0 +1,106 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "follow-on-google/buttons",
+	"version": "1.1.0",
+	"title": "Follow on Google Buttons",
+	"category": "widgets",
+	"icon": "external",
+	"description": "A row of customizable buttons linking to Google News, Google Discover, and preferred-source settings.",
+	"keywords": [ "google", "news", "follow", "discover", "button" ],
+	"supports": {
+		"html": false,
+		"align": [ "left", "center", "right", "wide" ],
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"attributes": {
+		"showNews": {
+			"type": "boolean",
+			"default": true
+		},
+		"showDiscover": {
+			"type": "boolean",
+			"default": true
+		},
+		"showPreferred": {
+			"type": "boolean",
+			"default": true
+		},
+		"newsUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"discoverUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"preferredUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"newsLabel": {
+			"type": "string",
+			"default": "Follow on Google News"
+		},
+		"discoverLabel": {
+			"type": "string",
+			"default": "Follow on Google Discover"
+		},
+		"preferredLabel": {
+			"type": "string",
+			"default": "Set as preferred source"
+		},
+		"alignment": {
+			"type": "string",
+			"default": "flex-start"
+		},
+		"openInNewTab": {
+			"type": "boolean",
+			"default": true
+		},
+		"newsStyle": {
+			"type": "object",
+			"default": {
+				"bgColor": "#1a73e8",
+				"textColor": "#ffffff",
+				"fontSize": 15,
+				"fontWeight": "600",
+				"borderWidth": 0,
+				"borderColor": "#1a73e8",
+				"borderStyle": "solid"
+			}
+		},
+		"discoverStyle": {
+			"type": "object",
+			"default": {
+				"bgColor": "#202124",
+				"textColor": "#ffffff",
+				"fontSize": 15,
+				"fontWeight": "600",
+				"borderWidth": 0,
+				"borderColor": "#202124",
+				"borderStyle": "solid"
+			}
+		},
+		"preferredStyle": {
+			"type": "object",
+			"default": {
+				"bgColor": "#ffffff",
+				"textColor": "#1a73e8",
+				"fontSize": 15,
+				"fontWeight": "600",
+				"borderWidth": 1,
+				"borderColor": "#dadce0",
+				"borderStyle": "solid"
+			}
+		}
+	},
+	"textdomain": "follow-on-google",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,58 @@
+/**
+ * Front-end (and shared) styles for the Follow on Google Buttons block.
+ *
+ * Per-button colors, font size, weight, and border are applied inline by
+ * render.php (user-configurable). This stylesheet handles only structure,
+ * layout, and interaction states.
+ *
+ * @package FollowOnGoogle
+ */
+
+.wp-block-follow-on-google-buttons {
+	&.fog-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		align-items: center;
+	}
+
+	.fog-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.6rem 1.1rem;
+		border-radius: 6px;
+		line-height: 1.2;
+		text-decoration: none;
+		transition: opacity 0.15s ease, box-shadow 0.15s ease;
+
+		&:hover,
+		&:focus {
+			opacity: 0.9;
+			box-shadow: 0 1px 4px rgba( 0, 0, 0, 0.2 );
+			text-decoration: none;
+		}
+
+		&:focus-visible {
+			outline: 2px solid currentColor;
+			outline-offset: 2px;
+		}
+	}
+
+	.fog-button__icon {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	@media ( max-width: 480px ) {
+		&.fog-buttons {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.fog-button {
+			justify-content: center;
+			width: 100%;
+		}
+	}
+}

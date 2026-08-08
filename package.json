@@ -1,0 +1,19 @@
+{
+	"name": "follow-on-google",
+	"version": "1.1.0",
+	"description": "A customizable Gutenberg block with buttons linking to Google News, Discover, and preferred-source settings.",
+	"author": "Your Name",
+	"license": "GPL-2.0-or-later",
+	"main": "build/index.js",
+	"scripts": {
+		"build": "wp-scripts build",
+		"start": "wp-scripts start",
+		"format": "wp-scripts format",
+		"lint:js": "wp-scripts lint-js",
+		"lint:css": "wp-scripts lint-style",
+		"plugin-zip": "wp-scripts plugin-zip"
+	},
+	"devDependencies": {
+		"@wordpress/scripts": "^30.0.0"
+	}
+}

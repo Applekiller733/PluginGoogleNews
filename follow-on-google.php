@@ -3,7 +3,7 @@
  * Plugin Name:       Follow on Google Buttons
  * Plugin URI:        https://example.com/follow-on-google
  * Description:        A customizable block with buttons linking to Google News (Follow), Google Discover, and preferred-source settings. Site owners control which buttons appear, their URLs, and labels.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Requires at least: 6.4
  * Requires PHP:      7.4
  * Author:            Your Name

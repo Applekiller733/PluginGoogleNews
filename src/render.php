@@ -125,7 +125,44 @@ if ( ! function_exists( 'fog_build_button_style' ) ) {
 	}
 }
 
-// Per-button default styles mirror the block.json attribute defaults.
+if ( ! function_exists( 'fog_url_matches_prefix' ) ) {
+	/**
+	 * Check whether a URL begins with an allowed prefix.
+	 *
+	 * Comparison is case-insensitive on the scheme/host but otherwise exact on
+	 * the prefix. An empty URL or empty prefix is treated as invalid.
+	 *
+	 * @param string $url    The URL to test.
+	 * @param string $prefix The required leading substring.
+	 * @return bool True when the URL starts with the prefix.
+	 */
+	function fog_url_matches_prefix( $url, $prefix ) {
+		$url    = is_string( $url ) ? trim( $url ) : '';
+		$prefix = is_string( $prefix ) ? $prefix : '';
+
+		if ( '' === $url || '' === $prefix ) {
+			return false;
+		}
+
+		// Case-insensitive comparison of the prefix portion.
+		return 0 === strncasecmp( $url, $prefix, strlen( $prefix ) );
+	}
+}
+
+/**
+ * Required URL prefix for each button type.
+ *
+ * Adjust these in one place if Google changes its URL formats. A button whose
+ * saved URL does not begin with its prefix will not be rendered on the front
+ * end (an admin-only notice is shown to logged-in editors instead).
+ */
+$fog_url_prefixes = array(
+	'is-news'      => 'https://news.google.com/publications/',
+	'is-discover'  => 'https://profile.google.com/cp/',
+	'is-preferred' => 'https://www.google.com/preferences/source?q=',
+);
+
+
 $fog_style_defaults = array(
 	'is-news'      => array(
 		'bgColor'     => '#1a73e8',
@@ -166,6 +203,7 @@ $fog_buttons = array(
 		'url'   => isset( $attributes['newsUrl'] ) ? $attributes['newsUrl'] : '',
 		'label' => isset( $attributes['newsLabel'] ) ? $attributes['newsLabel'] : '',
 		'mod'   => 'is-news',
+		'name'  => __( 'Google News', 'follow-on-google' ),
 		'style' => isset( $attributes['newsStyle'] ) ? $attributes['newsStyle'] : array(),
 	),
 	array(
@@ -173,6 +211,7 @@ $fog_buttons = array(
 		'url'   => isset( $attributes['discoverUrl'] ) ? $attributes['discoverUrl'] : '',
 		'label' => isset( $attributes['discoverLabel'] ) ? $attributes['discoverLabel'] : '',
 		'mod'   => 'is-discover',
+		'name'  => __( 'Google Discover', 'follow-on-google' ),
 		'style' => isset( $attributes['discoverStyle'] ) ? $attributes['discoverStyle'] : array(),
 	),
 	array(
@@ -180,20 +219,45 @@ $fog_buttons = array(
 		'url'   => isset( $attributes['preferredUrl'] ) ? $attributes['preferredUrl'] : '',
 		'label' => isset( $attributes['preferredLabel'] ) ? $attributes['preferredLabel'] : '',
 		'mod'   => 'is-preferred',
+		'name'  => __( 'Preferred source', 'follow-on-google' ),
 		'style' => isset( $attributes['preferredStyle'] ) ? $attributes['preferredStyle'] : array(),
 	),
 );
 
-// Filter out hidden buttons and buttons with no URL set.
-$fog_active = array_filter(
-	$fog_buttons,
-	static function ( $button ) {
-		return $button['show'] && '' !== trim( (string) $button['url'] );
-	}
-);
+// A visitor should never see a notice; only users who can edit content should.
+$fog_is_editor = function_exists( 'current_user_can' ) && current_user_can( 'edit_posts' );
 
-// If nothing to show, render nothing.
-if ( empty( $fog_active ) ) {
+// Partition the enabled buttons into those with a valid URL and those whose
+// URL is set but fails prefix validation (shown only as an admin notice).
+$fog_active   = array();
+$fog_rejected = array();
+
+foreach ( $fog_buttons as $fog_button ) {
+	if ( ! $fog_button['show'] ) {
+		continue;
+	}
+
+	$fog_url    = trim( (string) $fog_button['url'] );
+	$fog_prefix = isset( $fog_url_prefixes[ $fog_button['mod'] ] ) ? $fog_url_prefixes[ $fog_button['mod'] ] : '';
+
+	if ( '' === $fog_url ) {
+		// No URL set at all: nothing to render, no error to report.
+		continue;
+	}
+
+	if ( fog_url_matches_prefix( $fog_url, $fog_prefix ) ) {
+		$fog_active[] = $fog_button;
+	} else {
+		// URL provided but does not match the required prefix: reject it.
+		$fog_rejected[] = array(
+			'name'   => $fog_button['name'],
+			'prefix' => $fog_prefix,
+		);
+	}
+}
+
+// If there is nothing valid to show and no notice to display, render nothing.
+if ( empty( $fog_active ) && ( empty( $fog_rejected ) || ! $fog_is_editor ) ) {
 	return '';
 }
 
@@ -222,6 +286,33 @@ $fog_target = $fog_new_tab ? ' target="_blank" rel="noopener noreferrer"' : '';
 	echo $fog_wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	?>
 >
+	<?php if ( $fog_is_editor && ! empty( $fog_rejected ) ) : ?>
+		<div class="fog-admin-notice" role="note">
+			<strong><?php echo esc_html__( 'Follow on Google Buttons:', 'follow-on-google' ); ?></strong>
+			<?php echo esc_html__( 'These buttons are hidden because their URLs are not valid Google links. Only you (as an editor) can see this notice.', 'follow-on-google' ); ?>
+			<ul>
+				<?php foreach ( $fog_rejected as $fog_bad ) : ?>
+					<li>
+						<?php
+						echo wp_kses(
+							sprintf(
+								/* translators: 1: button name, 2: required URL prefix. */
+								__( '%1$s must start with %2$s', 'follow-on-google' ),
+								'<strong>' . esc_html( $fog_bad['name'] ) . '</strong>',
+								'<code>' . esc_html( $fog_bad['prefix'] ) . '</code>'
+							),
+							array(
+								'strong' => array(),
+								'code'   => array(),
+							)
+						);
+						?>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	<?php endif; ?>
+
 	<?php
 	foreach ( $fog_active as $fog_button ) :
 		$fog_defaults     = $fog_style_defaults[ $fog_button['mod'] ];

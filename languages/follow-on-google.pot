@@ -114,3 +114,27 @@ msgstr ""
 
 msgid "None"
 msgstr ""
+
+msgid "Google News"
+msgstr ""
+
+msgid "Google Discover"
+msgstr ""
+
+msgid "Preferred source"
+msgstr ""
+
+msgid "Follow on Google Buttons:"
+msgstr ""
+
+msgid "These buttons are hidden because their URLs are not valid Google links. Only you (as an editor) can see this notice."
+msgstr ""
+
+msgid "%1$s must start with %2$s"
+msgstr ""
+
+msgid "This URL will be rejected on the front end. It must start with:"
+msgstr ""
+
+msgid "No buttons to show yet. Enable a button and enter a valid Google URL in the block settings."
+msgstr ""

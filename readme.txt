@@ -4,7 +4,7 @@ Tags: google news, follow button, google discover, block, gutenberg
 Requires at least: 6.4
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -86,6 +86,14 @@ future release.
 
 == Changelog ==
 
+= 1.2.0 =
+* Added strict URL validation: each button only renders when its URL begins
+  with the expected Google prefix (News publication, Discover profile, or
+  preferred-source settings).
+* Rejected URLs are hidden on the front end; an admin-only notice explains why
+  to logged-in editors.
+* Added a matching inline warning in the block editor.
+
 = 1.1.0 =
 * Added per-button styling controls: background color, text color, font size,
   font weight, and border (width, color, style).
@@ -95,6 +103,10 @@ future release.
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.2.0 =
+Buttons now require valid Google URLs; invalid ones are hidden with an
+admin-only notice.
 
 = 1.1.0 =
 Adds per-button styling controls (colors, typography, border).

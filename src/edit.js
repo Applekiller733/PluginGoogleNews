@@ -16,7 +16,33 @@ import {
 	TextControl,
 	SelectControl,
 	RangeControl,
+	Notice,
 } from '@wordpress/components';
+
+/**
+ * Required URL prefix per button type. Keep in sync with render.php.
+ * A URL that does not start with its prefix is rejected on the front end.
+ */
+const URL_PREFIXES = {
+	showNews: 'https://news.google.com/publications/',
+	showDiscover: 'https://profile.google.com/cp/',
+	showPreferred: 'https://www.google.com/preferences/source?q=',
+};
+
+/**
+ * Case-insensitive prefix test mirroring the server validator.
+ *
+ * @param {string} url    URL to test.
+ * @param {string} prefix Required leading substring.
+ * @return {boolean} Whether url starts with prefix.
+ */
+function urlMatchesPrefix( url, prefix ) {
+	const value = typeof url === 'string' ? url.trim() : '';
+	if ( ! value || ! prefix ) {
+		return false;
+	}
+	return value.slice( 0, prefix.length ).toLowerCase() === prefix.toLowerCase();
+}
 
 const FONT_WEIGHTS = [
 	{ label: __( 'Light (300)', 'follow-on-google' ), value: '300' },
@@ -138,6 +164,22 @@ function ButtonControls( {
 							setAttributes( { [ urlKey ]: value } )
 						}
 					/>
+					{ attributes[ urlKey ] &&
+						! urlMatchesPrefix(
+							attributes[ urlKey ],
+							URL_PREFIXES[ showKey ]
+						) && (
+							<Notice
+								status="warning"
+								isDismissible={ false }
+							>
+								{ __(
+									'This URL will be rejected on the front end. It must start with:',
+									'follow-on-google'
+								) }{ ' ' }
+								<code>{ URL_PREFIXES[ showKey ] }</code>
+							</Notice>
+						) }
 					<TextControl
 						label={ __( 'Button label', 'follow-on-google' ) }
 						value={ attributes[ labelKey ] }
@@ -199,23 +241,31 @@ export default function Edit( { attributes, setAttributes } ) {
 	const previewButtons = [
 		{
 			show: attributes.showNews,
+			url: attributes.newsUrl,
+			prefix: URL_PREFIXES.showNews,
 			label: attributes.newsLabel,
 			mod: 'is-news',
 			style: attributes.newsStyle,
 		},
 		{
 			show: attributes.showDiscover,
+			url: attributes.discoverUrl,
+			prefix: URL_PREFIXES.showDiscover,
 			label: attributes.discoverLabel,
 			mod: 'is-discover',
 			style: attributes.discoverStyle,
 		},
 		{
 			show: attributes.showPreferred,
+			url: attributes.preferredUrl,
+			prefix: URL_PREFIXES.showPreferred,
 			label: attributes.preferredLabel,
 			mod: 'is-preferred',
 			style: attributes.preferredStyle,
 		},
-	].filter( ( b ) => b.show );
+	].filter(
+		( b ) => b.show && urlMatchesPrefix( b.url, b.prefix )
+	);
 
 	return (
 		<>
@@ -305,7 +355,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				{ previewButtons.length === 0 && (
 					<p className="fog-empty">
 						{ __(
-							'Enable at least one button in the block settings.',
+							'No buttons to show yet. Enable a button and enter a valid Google URL in the block settings.',
 							'follow-on-google'
 						) }
 					</p>

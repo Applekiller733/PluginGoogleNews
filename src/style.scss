@@ -56,3 +56,31 @@
 		}
 	}
 }
+
+// Admin-only notice shown when a button URL fails validation.
+// Never displayed to visitors (gated by capability check in render.php).
+.wp-block-follow-on-google-buttons {
+	.fog-admin-notice {
+		flex-basis: 100%;
+		margin: 0 0 0.75rem;
+		padding: 0.75rem 1rem;
+		border: 1px solid #f0b849;
+		border-left-width: 4px;
+		border-radius: 4px;
+		background: #fcf6e6;
+		color: #3c2f00;
+		font-size: 0.9rem;
+
+		ul {
+			margin: 0.4rem 0 0;
+			padding-left: 1.2rem;
+		}
+
+		code {
+			background: rgba( 0, 0, 0, 0.06 );
+			padding: 0.05rem 0.3rem;
+			border-radius: 3px;
+			word-break: break-all;
+		}
+	}
+}

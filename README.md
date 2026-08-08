@@ -47,6 +47,18 @@ npm run plugin-zip   # produce an installable zip
 compiles the SCSS, generates `build/index.asset.php` (dependency manifest),
 and copies `block.json` and `render.php` into `build/`.
 
+## Testing
+
+See [TESTING.md](TESTING.md) for the full workflow: building, runtime testing
+in a real WordPress via `wp-env` (Docker), and the pre-submission compliance
+checks (Plugin Check and PHPCS). Quick start:
+
+```bash
+npm install
+npm run build
+npm run env:start    # requires Docker; opens WordPress at localhost:8888
+```
+
 ## License
 
 GPL-2.0-or-later.

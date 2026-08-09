@@ -1,0 +1,27 @@
+# Files excluded from the distributed plugin zip built by `npm run plugin-zip`.
+# These stay in the git repository; they are simply not shipped to users.
+
+# This file itself
+.distignore
+
+# Version control
+.git
+.github
+.gitignore
+
+# Editor / tooling config
+.editorconfig
+.wp-env.json
+.wp-env.override.json
+.phpcs.xml.dist
+
+# Dependencies (never shipped)
+node_modules
+vendor
+
+# Lockfiles
+package-lock.json
+composer.lock
+
+# Developer documentation (readme.txt is the user-facing one)
+TESTING.md

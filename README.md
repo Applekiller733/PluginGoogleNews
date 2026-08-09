@@ -25,15 +25,6 @@ package.json                Build scripts and @wordpress/scripts dependency.
 languages/                  Translation template (.pot).
 ```
 
-### Why render.php?
-
-This is a **dynamic block**: its front-end HTML is produced by PHP
-(`render.php`) on every page load, not frozen into post content at save time.
-The JS `save` function returns `null`; `render.php` does the real rendering.
-This keeps existing posts up to date when the block changes and keeps all
-output escaping/sanitization server-side. After building, `render.php` is
-copied into `build/` and referenced by `block.json`'s `render` field.
-
 ## Build
 
 ```bash

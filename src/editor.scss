@@ -19,3 +19,23 @@
 		cursor: default;
 	}
 }
+
+// Icon picker in the block settings sidebar.
+.fog-icon-picker {
+	margin-bottom: 16px;
+
+	&__label {
+		margin: 0 0 4px;
+	}
+
+	&__preview {
+		display: block;
+		max-width: 48px;
+		max-height: 48px;
+		margin-bottom: 8px;
+		padding: 4px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		background: #f6f7f7;
+	}
+}

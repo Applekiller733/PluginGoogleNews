@@ -44,17 +44,6 @@
 		align-items: center;
 	}
 
-	@media ( max-width: 480px ) {
-		&.fog-buttons {
-			flex-direction: column;
-			align-items: stretch;
-		}
-
-		.fog-button {
-			justify-content: center;
-			width: 100%;
-		}
-	}
 }
 
 // Admin-only notice shown when a button URL fails validation.
@@ -81,6 +70,50 @@
 			padding: 0.05rem 0.3rem;
 			border-radius: 3px;
 			word-break: break-all;
+		}
+	}
+}
+
+// Custom (media library) icons and no-wrap layout support.
+.wp-block-follow-on-google-buttons {
+	.fog-button__icon-img {
+		display: block;
+		width: auto;
+		height: 1.2em;
+		max-height: 24px;
+		object-fit: contain;
+	}
+
+	// When wrapping is disabled and "shrink to fit" is chosen, allow the
+	// buttons to compress and truncate their label rather than overflow.
+	.fog-button.is-shrink {
+		min-width: 0;
+		flex-shrink: 1;
+
+		.fog-button__label {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	}
+
+	// Keep the scroll affordance from clipping focus outlines.
+	&.fog-buttons {
+		scrollbar-width: thin;
+	}
+}
+
+// The stacked mobile layout must not fight an explicit no-wrap setting, so it
+// only applies when wrapping is allowed.
+@media ( max-width: 480px ) {
+	.wp-block-follow-on-google-buttons.fog-buttons[style*="flex-wrap:wrap"],
+	.wp-block-follow-on-google-buttons.fog-buttons[style*="flex-wrap: wrap"] {
+		flex-direction: column;
+		align-items: stretch;
+
+		.fog-button {
+			justify-content: center;
+			width: 100%;
 		}
 	}
 }

@@ -9,7 +9,10 @@ import {
 	useBlockProps,
 	InspectorControls,
 	PanelColorSettings,
+	MediaUpload,
+	MediaUploadCheck,
 } from '@wordpress/block-editor';
+import { useSelect } from '@wordpress/data';
 import {
 	PanelBody,
 	ToggleControl,
@@ -17,6 +20,7 @@ import {
 	SelectControl,
 	RangeControl,
 	Notice,
+	Button,
 } from '@wordpress/components';
 
 /**
@@ -60,6 +64,77 @@ const BORDER_STYLES = [
 	{ label: __( 'Double', 'follow-on-google' ), value: 'double' },
 	{ label: __( 'None', 'follow-on-google' ), value: 'none' },
 ];
+
+/**
+ * Media-library icon picker for a single button.
+ *
+ * Stores an attachment ID rather than a URL, so the image stays managed by
+ * WordPress and is rendered server-side through wp_get_attachment_image().
+ *
+ * @param {Object}   props               Component props.
+ * @param {string}   props.iconKey       Attribute name holding the icon ID.
+ * @param {number}   props.iconId        Current attachment ID (0 = default).
+ * @param {Function} props.setAttributes Block setter.
+ * @return {JSX.Element} Icon controls.
+ */
+function IconPicker( { iconKey, iconId, setAttributes } ) {
+	const iconUrl = useSelect(
+		( select ) => {
+			if ( ! iconId ) {
+				return null;
+			}
+			const media = select( 'core' ).getMedia( iconId );
+			if ( ! media ) {
+				return null;
+			}
+			return (
+				media.media_details?.sizes?.thumbnail?.source_url ||
+				media.source_url
+			);
+		},
+		[ iconId ]
+	);
+
+	return (
+		<div className="fog-icon-picker">
+			<p className="fog-icon-picker__label">
+				<strong>{ __( 'Icon', 'follow-on-google' ) }</strong>
+			</p>
+			{ iconUrl && (
+				<img
+					className="fog-icon-picker__preview"
+					src={ iconUrl }
+					alt=""
+				/>
+			) }
+			<MediaUploadCheck>
+				<MediaUpload
+					onSelect={ ( media ) =>
+						setAttributes( { [ iconKey ]: media.id } )
+					}
+					allowedTypes={ [ 'image' ] }
+					value={ iconId }
+					render={ ( { open } ) => (
+						<Button variant="secondary" onClick={ open }>
+							{ iconId
+								? __( 'Replace icon', 'follow-on-google' )
+								: __( 'Choose icon', 'follow-on-google' ) }
+						</Button>
+					) }
+				/>
+			</MediaUploadCheck>
+			{ !! iconId && (
+				<Button
+					variant="tertiary"
+					isDestructive
+					onClick={ () => setAttributes( { [ iconKey ]: 0 } ) }
+				>
+					{ __( 'Use default', 'follow-on-google' ) }
+				</Button>
+			) }
+		</div>
+	);
+}
 
 /**
  * Style controls (color, typography, border) for a single button.
@@ -140,6 +215,7 @@ function ButtonControls( {
 	urlKey,
 	labelKey,
 	styleKey,
+	iconKey,
 	urlHelp,
 	attributes,
 	setAttributes,
@@ -187,6 +263,11 @@ function ButtonControls( {
 							setAttributes( { [ labelKey ]: value } )
 						}
 					/>
+					<IconPicker
+						iconKey={ iconKey }
+						iconId={ attributes[ iconKey ] }
+						setAttributes={ setAttributes }
+					/>
 					<StyleControls
 						styleKey={ styleKey }
 						style={ attributes[ styleKey ] }
@@ -231,11 +312,16 @@ function toPreviewStyle( style = {} ) {
  * @return {JSX.Element} Editor markup.
  */
 export default function Edit( { attributes, setAttributes } ) {
-	const { alignment, openInNewTab } = attributes;
+	const { alignment, allowWrap, wrapOverflow, openInNewTab } = attributes;
 
 	const blockProps = useBlockProps( {
 		className: 'fog-buttons',
-		style: { justifyContent: alignment },
+		style: {
+			justifyContent: alignment,
+			flexWrap: allowWrap ? 'wrap' : 'nowrap',
+			overflowX:
+				! allowWrap && 'scroll' === wrapOverflow ? 'auto' : undefined,
+		},
 	} );
 
 	const previewButtons = [
@@ -290,11 +376,64 @@ export default function Edit( { attributes, setAttributes } ) {
 								label: __( 'Right', 'follow-on-google' ),
 								value: 'flex-end',
 							},
+							{
+								label: __(
+									'Spread across the row',
+									'follow-on-google'
+								),
+								value: 'space-between',
+							},
 						] }
+						help={ __(
+							'Alignment applies to every row, so a button pushed onto a second row follows the same alignment.',
+							'follow-on-google'
+						) }
 						onChange={ ( value ) =>
 							setAttributes( { alignment: value } )
 						}
 					/>
+					<ToggleControl
+						label={ __(
+							'Allow buttons to wrap onto multiple rows',
+							'follow-on-google'
+						) }
+						checked={ allowWrap }
+						help={ __(
+							'Turn off to force all buttons onto a single row.',
+							'follow-on-google'
+						) }
+						onChange={ ( value ) =>
+							setAttributes( { allowWrap: value } )
+						}
+					/>
+					{ ! allowWrap && (
+						<SelectControl
+							label={ __(
+								'If the row overflows',
+								'follow-on-google'
+							) }
+							value={ wrapOverflow }
+							options={ [
+								{
+									label: __(
+										'Scroll horizontally',
+										'follow-on-google'
+									),
+									value: 'scroll',
+								},
+								{
+									label: __(
+										'Shrink buttons to fit',
+										'follow-on-google'
+									),
+									value: 'shrink',
+								},
+							] }
+							onChange={ ( value ) =>
+								setAttributes( { wrapOverflow: value } )
+							}
+						/>
+					) }
 					<ToggleControl
 						label={ __(
 							'Open links in a new tab',
@@ -313,6 +452,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					urlKey="newsUrl"
 					labelKey="newsLabel"
 					styleKey="newsStyle"
+					iconKey="newsIconId"
 					urlHelp={ __(
 						'Your Google News publication URL from Publisher Center.',
 						'follow-on-google'
@@ -326,6 +466,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					urlKey="discoverUrl"
 					labelKey="discoverLabel"
 					styleKey="discoverStyle"
+					iconKey="discoverIconId"
 					urlHelp={ __(
 						'Google Discover has no per-site follow URL. Point this at your News publication or a help page.',
 						'follow-on-google'
@@ -342,6 +483,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					urlKey="preferredUrl"
 					labelKey="preferredLabel"
 					styleKey="preferredStyle"
+					iconKey="preferredIconId"
 					urlHelp={ __(
 						'Preferred source is a user setting in Google Search. Link to a how-to or Google settings page.',
 						'follow-on-google'

@@ -1,0 +1,370 @@
+# Romanian translation for Follow on Google Buttons.
+# Copyright (C) 2026 Popa Zelu Andrei
+# This file is distributed under the same license as the plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Follow on Google Buttons 1.3.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Applekiller733/PluginGoogleNews\n"
+"PO-Revision-Date: 2026-08-09 12:00+0000\n"
+"Last-Translator: Popa Zelu Andrei applekiller733@gmail.com\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2);\n"
+"X-Domain: follow-on-google\n"
+
+
+#: includes/config.php:451
+msgid "%1$s must start with %2$s"
+msgstr "%1$s trebuie să înceapă cu %2$s"
+
+#: includes/settings.php:271
+msgid "After the content"
+msgstr "După conținut"
+
+#: src/edit.js:364
+msgid "Alignment"
+msgstr "Aliniere"
+
+#: src/edit.js:387
+#: includes/settings.php:322
+msgid "Alignment applies to every row, so a button pushed onto a second row follows the same alignment."
+msgstr "Alinierea se aplică fiecărui rând, așa că un buton mutat pe al doilea rând urmează aceeași aliniere."
+
+#: src/edit.js:396
+#: includes/settings.php:333
+msgid "Allow buttons to wrap onto multiple rows"
+msgstr "Permite butoanelor să se dispună pe mai multe rânduri"
+
+#: includes/settings.php:280
+msgid "Apply to"
+msgstr "Aplică la"
+
+#: includes/settings.php:250
+msgid "Automatic insertion"
+msgstr "Inserare automată"
+
+#: includes/settings.php:259
+msgid "Automatically add the buttons to content"
+msgstr "Adaugă automat butoanele în conținut"
+
+#: src/edit.js:162
+msgid "Background"
+msgstr "Fundal"
+
+#: includes/settings.php:170
+msgid "Background color"
+msgstr "Culoare de fundal"
+
+#: includes/settings.php:268
+msgid "Before the content"
+msgstr "Înainte de conținut"
+
+#: src/edit.js:56
+msgid "Bold (700)"
+msgstr "Gros (700)"
+
+#: src/edit.js:172
+msgid "Border"
+msgstr "Margine"
+
+#: includes/settings.php:172
+msgid "Border color"
+msgstr "Culoarea marginii"
+
+#: src/edit.js:197
+#: includes/settings.php:212
+msgid "Border style"
+msgstr "Stilul marginii"
+
+#: src/edit.js:190
+#: includes/settings.php:205
+msgid "Border width (px)"
+msgstr "Lățimea marginii (px)"
+
+#: includes/settings.php:274
+msgid "Both before and after"
+msgstr "Atât înainte, cât și după"
+
+#: src/edit.js:260
+#: includes/settings.php:146
+msgid "Button label"
+msgstr "Eticheta butonului"
+
+#: includes/settings.php:369
+msgid "Buttons"
+msgstr "Butoane"
+
+#: src/edit.js:372
+#: includes/settings.php:310
+msgid "Center"
+msgstr "Centru"
+
+#: src/edit.js:121
+#: includes/settings.php:95
+#: includes/settings.php:164
+msgid "Choose icon"
+msgstr "Alege pictograma"
+
+#: src/edit.js:156
+msgid "Colors"
+msgstr "Culori"
+
+#: src/edit.js:62
+msgid "Dashed"
+msgstr "Întreruptă"
+
+#: includes/settings.php:97
+#: includes/settings.php:158
+msgid "Default Google icon"
+msgstr "Pictograma Google implicită"
+
+#: src/edit.js:63
+msgid "Dotted"
+msgstr "Punctată"
+
+#: src/edit.js:64
+msgid "Double"
+msgstr "Dublă"
+
+#: includes/settings.php:253
+msgid "Enable"
+msgstr "Activează"
+
+#: src/edit.js:57
+msgid "Extrabold (800)"
+msgstr "Extra-gros (800)"
+
+#: includes/settings.php:55
+msgid "Follow on Google"
+msgstr "Follow on Google"
+
+#: includes/settings.php:54
+#: includes/settings.php:241
+msgid "Follow on Google Buttons"
+msgstr "Butoane Follow on Google"
+
+#: includes/config.php:443
+msgid "Follow on Google Buttons:"
+msgstr "Butoane Follow on Google:"
+
+#: includes/config.php:76
+msgid "Follow on Google Discover"
+msgstr "Urmărește pe Google Discover"
+
+#: includes/config.php:61
+msgid "Follow on Google News"
+msgstr "Urmărește pe Google News"
+
+#: src/edit.js:177
+#: includes/settings.php:187
+msgid "Font size (px)"
+msgstr "Dimensiunea fontului (px)"
+
+#: src/edit.js:184
+#: includes/settings.php:194
+msgid "Font weight"
+msgstr "Grosimea fontului"
+
+#: includes/config.php:42
+msgid "Google Discover"
+msgstr "Google Discover"
+
+#: src/edit.js:464
+msgid "Google Discover button"
+msgstr "Butonul Google Discover"
+
+#: src/edit.js:470
+msgid "Google Discover has no per-site follow URL. Point this at your News publication or a help page."
+msgstr "Google Discover nu are o adresă URL de urmărire per site. Folosește adresa publicației tale News sau o pagină de ajutor."
+
+#: includes/config.php:41
+msgid "Google News"
+msgstr "Google News"
+
+#: src/edit.js:450
+msgid "Google News button"
+msgstr "Butonul Google News"
+
+#: includes/settings.php:304
+msgid "Horizontal alignment"
+msgstr "Aliniere orizontală"
+
+#: src/edit.js:101
+#: includes/settings.php:153
+msgid "Icon"
+msgstr "Pictogramă"
+
+#: includes/settings.php:341
+msgid "If a single row overflows"
+msgstr "Dacă un singur rând depășește spațiul"
+
+#: src/edit.js:411
+msgid "If the row overflows"
+msgstr "Dacă rândul depășește spațiul"
+
+#: includes/settings.php:345
+msgid "Keep full size and scroll horizontally"
+msgstr "Păstrează dimensiunea completă și derulează orizontal"
+
+#: src/edit.js:360
+#: includes/settings.php:301
+msgid "Layout"
+msgstr "Aspect"
+
+#: src/edit.js:368
+#: includes/settings.php:309
+msgid "Left"
+msgstr "Stânga"
+
+#: src/edit.js:52
+msgid "Light (300)"
+msgstr "Subțire (300)"
+
+#: includes/settings.php:357
+msgid "Links"
+msgstr "Linkuri"
+
+#: src/edit.js:54
+msgid "Medium (500)"
+msgstr "Mediu (500)"
+
+#: includes/settings.php:138
+msgid "Must start with %s"
+msgstr "Trebuie să înceapă cu %s"
+
+#: src/edit.js:499
+msgid "No buttons to show yet. Enable a button and enter a valid Google URL in the block settings."
+msgstr "Niciun buton de afișat încă. Activează un buton și introdu o adresă URL Google validă în setările blocului."
+
+#: src/edit.js:65
+msgid "None"
+msgstr "Fără"
+
+#: includes/settings.php:352
+msgid "Only applies when wrapping is turned off."
+msgstr "Se aplică doar când încadrarea este dezactivată."
+
+#: src/edit.js:438
+#: includes/settings.php:363
+msgid "Open links in a new tab"
+msgstr "Deschide linkurile într-o filă nouă"
+
+#: includes/settings.php:264
+msgid "Position"
+msgstr "Poziție"
+
+#: includes/config.php:43
+msgid "Preferred source"
+msgstr "Sursă preferată"
+
+#: src/edit.js:478
+msgid "Preferred source button"
+msgstr "Butonul pentru sursă preferată"
+
+#: src/edit.js:487
+msgid "Preferred source is a user setting in Google Search. Link to a how-to or Google settings page."
+msgstr "Sursa preferată este o setare a utilizatorului în Căutarea Google. Trimite către un ghid sau către pagina de setări Google."
+
+#: src/edit.js:53
+msgid "Regular (400)"
+msgstr "Normal (400)"
+
+#: src/edit.js:120
+msgid "Replace icon"
+msgstr "Înlocuiește pictograma"
+
+#: src/edit.js:376
+#: includes/settings.php:311
+msgid "Right"
+msgstr "Dreapta"
+
+#: src/edit.js:418
+msgid "Scroll horizontally"
+msgstr "Derulează orizontal"
+
+#: src/edit.js:55
+msgid "Semibold (600)"
+msgstr "Semi-gros (600)"
+
+#: includes/config.php:91
+msgid "Set as preferred source"
+msgstr "Setează ca sursă preferată"
+
+#: follow-on-google.php:90
+msgid "Settings"
+msgstr "Setări"
+
+#: src/edit.js:226
+#: includes/settings.php:125
+msgid "Show this button"
+msgstr "Afișează acest buton"
+
+#: src/edit.js:425
+msgid "Shrink buttons to fit"
+msgstr "Micșorează butoanele pentru a încăpea"
+
+#: includes/settings.php:348
+msgid "Shrink the buttons to fit"
+msgstr "Micșorează butoanele pentru a încăpea"
+
+#: src/edit.js:61
+msgid "Solid"
+msgstr "Continuă"
+
+#: src/edit.js:380
+#: includes/settings.php:312
+msgid "Spread across the row"
+msgstr "Distribuie pe rând"
+
+#: src/edit.js:167
+msgid "Text"
+msgstr "Text"
+
+#: includes/settings.php:171
+msgid "Text color"
+msgstr "Culoarea textului"
+
+#: includes/config.php:445
+msgid "These buttons are hidden because their URLs are not valid Google links. Only you (as an editor) can see this notice."
+msgstr "Aceste butoane sunt ascunse deoarece adresele lor URL nu sunt linkuri Google valide. Doar tu (în calitate de editor) poți vedea această notificare."
+
+#: includes/settings.php:244
+msgid "These settings control the buttons that are inserted automatically. Blocks you place manually keep their own settings."
+msgstr "Aceste setări controlează butoanele inserate automat. Blocurile plasate manual își păstrează propriile setări."
+
+#: src/edit.js:252
+msgid "This URL will be rejected on the front end. It must start with:"
+msgstr "Această adresă URL va fi respinsă pe site. Trebuie să înceapă cu:"
+
+#: src/edit.js:401
+msgid "Turn off to force all buttons onto a single row."
+msgstr "Dezactivează pentru a forța toate butoanele pe un singur rând."
+
+#: src/edit.js:235
+#: includes/settings.php:130
+msgid "URL"
+msgstr "URL"
+
+#: includes/settings.php:336
+msgid "Uncheck to force all buttons onto a single row."
+msgstr "Debifează pentru a forța toate butoanele pe un singur rând."
+
+#: src/edit.js:132
+#: includes/settings.php:165
+msgid "Use default"
+msgstr "Folosește implicit"
+
+#: includes/settings.php:96
+msgid "Use this icon"
+msgstr "Folosește această pictogramă"
+
+#: includes/settings.php:327
+msgid "Wrapping"
+msgstr "Încadrare"
+
+#: src/edit.js:456
+msgid "Your Google News publication URL from Publisher Center."
+msgstr "Adresa URL a publicației tale Google News din Publisher Center."

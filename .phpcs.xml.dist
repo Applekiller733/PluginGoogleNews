@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="Follow on Google Buttons">
-	<description>Coding standards for the Follow on Google Buttons plugin.</description>
+<ruleset name="News Follow Buttons">
+	<description>Coding standards for the News Follow Buttons plugin.</description>
 
 	<!-- What to scan. -->
 	<file>.</file>
@@ -20,8 +20,8 @@
 	<!-- Enforce the WordPress standards. -->
 	<rule ref="WordPress">
 		<!--
-			Allow our short function prefix "fog_". The directory requires a
-			unique prefix; fog_ is ours. Adjust if you pick a longer one.
+			Allow our short function prefix "nfb_". The directory requires a
+			unique prefix; nfb_ is ours. Adjust if you pick a longer one.
 		-->
 	</rule>
 
@@ -29,7 +29,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="follow-on-google"/>
+				<element value="news-follow-buttons"/>
 			</property>
 		</properties>
 	</rule>
@@ -39,7 +39,7 @@
 		<properties>
 			<property name="prefixes" type="array">
 				<element value="fog"/>
-				<element value="follow_on_google"/>
+				<element value="news_follow_buttons"/>
 			</property>
 		</properties>
 	</rule>

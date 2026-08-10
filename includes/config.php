@@ -4,10 +4,10 @@
  *
  * Both the block (src/render.php) and the auto-insert filter
  * (includes/auto-insert.php) build a config array of the shape returned by
- * fog_get_default_config() and pass it to fog_render_buttons(). Keeping one
+ * nfb_get_default_config() and pass it to nfb_render_buttons(). Keeping one
  * renderer means the two paths can never drift apart.
  *
- * @package FollowOnGoogle
+ * @package NewsFollowButtons
  */
 
 // Exit if accessed directly.
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return array<string,string> Map of button key to required prefix.
  */
-function fog_get_url_prefixes() {
+function nfb_get_url_prefixes() {
 	return array(
 		'news'      => 'https://news.google.com/publications/',
 		'discover'  => 'https://profile.google.com/cp/',
@@ -36,11 +36,11 @@ function fog_get_url_prefixes() {
  *
  * @return array<string,string> Map of button key to display name.
  */
-function fog_get_button_names() {
+function nfb_get_button_names() {
 	return array(
-		'news'      => __( 'Google News', 'follow-on-google' ),
-		'discover'  => __( 'Google Discover', 'follow-on-google' ),
-		'preferred' => __( 'Preferred source', 'follow-on-google' ),
+		'news'      => __( 'Google News', 'news-follow-buttons' ),
+		'discover'  => __( 'Google Discover', 'news-follow-buttons' ),
+		'preferred' => __( 'Preferred source', 'news-follow-buttons' ),
 	);
 }
 
@@ -52,13 +52,13 @@ function fog_get_button_names() {
  *
  * @return array Default config.
  */
-function fog_get_default_config() {
+function nfb_get_default_config() {
 	return array(
 		'buttons'    => array(
 			'news'      => array(
 				'enabled' => true,
 				'url'     => '',
-				'label'   => __( 'Follow on Google News', 'follow-on-google' ),
+				'label'   => __( 'Follow on Google News', 'news-follow-buttons' ),
 				'iconId'  => 0,
 				'style'   => array(
 					'bgColor'     => '#1a73e8',
@@ -73,7 +73,7 @@ function fog_get_default_config() {
 			'discover'  => array(
 				'enabled' => true,
 				'url'     => '',
-				'label'   => __( 'Follow on Google Discover', 'follow-on-google' ),
+				'label'   => __( 'Follow on Google Discover', 'news-follow-buttons' ),
 				'iconId'  => 0,
 				'style'   => array(
 					'bgColor'     => '#202124',
@@ -88,7 +88,7 @@ function fog_get_default_config() {
 			'preferred' => array(
 				'enabled' => true,
 				'url'     => '',
-				'label'   => __( 'Set as preferred source', 'follow-on-google' ),
+				'label'   => __( 'Set as preferred source', 'news-follow-buttons' ),
 				'iconId'  => 0,
 				'style'   => array(
 					'bgColor'     => '#ffffff',
@@ -132,7 +132,7 @@ function fog_get_default_config() {
  * @param string $fallback Safe default color.
  * @return string Sanitized color.
  */
-function fog_sanitize_color( $value, $fallback ) {
+function nfb_sanitize_color( $value, $fallback ) {
 	$value = is_string( $value ) ? trim( $value ) : '';
 
 	if ( '' === $value ) {
@@ -159,7 +159,7 @@ function fog_sanitize_color( $value, $fallback ) {
  * @param int   $fallback Default when non-numeric.
  * @return int Sanitized integer.
  */
-function fog_sanitize_int_range( $value, $min, $max, $fallback ) {
+function nfb_sanitize_int_range( $value, $min, $max, $fallback ) {
 	if ( ! is_numeric( $value ) ) {
 		return $fallback;
 	}
@@ -175,7 +175,7 @@ function fog_sanitize_int_range( $value, $min, $max, $fallback ) {
  * @param string $fallback Default.
  * @return string Sanitized value.
  */
-function fog_sanitize_allowed( $value, $allowed, $fallback ) {
+function nfb_sanitize_allowed( $value, $allowed, $fallback ) {
 	$value = is_string( $value ) ? trim( $value ) : '';
 	return in_array( $value, $allowed, true ) ? $value : $fallback;
 }
@@ -190,7 +190,7 @@ function fog_sanitize_allowed( $value, $allowed, $fallback ) {
  * @param string $prefix Required leading substring.
  * @return bool True when the URL starts with the prefix.
  */
-function fog_url_matches_prefix( $url, $prefix ) {
+function nfb_url_matches_prefix( $url, $prefix ) {
 	$url    = is_string( $url ) ? trim( $url ) : '';
 	$prefix = is_string( $prefix ) ? $prefix : '';
 
@@ -208,21 +208,21 @@ function fog_url_matches_prefix( $url, $prefix ) {
  * @param array $defaults Defaults for this button.
  * @return array Sanitized style array.
  */
-function fog_sanitize_style( $style, $defaults ) {
+function nfb_sanitize_style( $style, $defaults ) {
 	$style = is_array( $style ) ? $style : array();
 
 	return array(
-		'bgColor'     => fog_sanitize_color( isset( $style['bgColor'] ) ? $style['bgColor'] : '', $defaults['bgColor'] ),
-		'textColor'   => fog_sanitize_color( isset( $style['textColor'] ) ? $style['textColor'] : '', $defaults['textColor'] ),
-		'fontSize'    => fog_sanitize_int_range( isset( $style['fontSize'] ) ? $style['fontSize'] : '', 8, 72, $defaults['fontSize'] ),
-		'fontWeight'  => fog_sanitize_allowed(
+		'bgColor'     => nfb_sanitize_color( isset( $style['bgColor'] ) ? $style['bgColor'] : '', $defaults['bgColor'] ),
+		'textColor'   => nfb_sanitize_color( isset( $style['textColor'] ) ? $style['textColor'] : '', $defaults['textColor'] ),
+		'fontSize'    => nfb_sanitize_int_range( isset( $style['fontSize'] ) ? $style['fontSize'] : '', 8, 72, $defaults['fontSize'] ),
+		'fontWeight'  => nfb_sanitize_allowed(
 			isset( $style['fontWeight'] ) ? (string) $style['fontWeight'] : '',
 			array( '100', '200', '300', '400', '500', '600', '700', '800', '900', 'normal', 'bold' ),
 			$defaults['fontWeight']
 		),
-		'borderWidth' => fog_sanitize_int_range( isset( $style['borderWidth'] ) ? $style['borderWidth'] : '', 0, 12, $defaults['borderWidth'] ),
-		'borderColor' => fog_sanitize_color( isset( $style['borderColor'] ) ? $style['borderColor'] : '', $defaults['borderColor'] ),
-		'borderStyle' => fog_sanitize_allowed(
+		'borderWidth' => nfb_sanitize_int_range( isset( $style['borderWidth'] ) ? $style['borderWidth'] : '', 0, 12, $defaults['borderWidth'] ),
+		'borderColor' => nfb_sanitize_color( isset( $style['borderColor'] ) ? $style['borderColor'] : '', $defaults['borderColor'] ),
+		'borderStyle' => nfb_sanitize_allowed(
 			isset( $style['borderStyle'] ) ? $style['borderStyle'] : '',
 			array( 'solid', 'dashed', 'dotted', 'double', 'none' ),
 			$defaults['borderStyle']
@@ -239,8 +239,8 @@ function fog_sanitize_style( $style, $defaults ) {
  * @param mixed $config Raw config.
  * @return array Sanitized config.
  */
-function fog_sanitize_config( $config ) {
-	$defaults = fog_get_default_config();
+function nfb_sanitize_config( $config ) {
+	$defaults = nfb_get_default_config();
 	$config   = is_array( $config ) ? $config : array();
 	$clean    = $defaults;
 
@@ -255,7 +255,7 @@ function fog_sanitize_config( $config ) {
 			? sanitize_text_field( (string) $raw['label'] )
 			: $button_defaults['label'];
 		$clean['buttons'][ $key ]['iconId']  = isset( $raw['iconId'] ) ? absint( $raw['iconId'] ) : 0;
-		$clean['buttons'][ $key ]['style']   = fog_sanitize_style(
+		$clean['buttons'][ $key ]['style']   = nfb_sanitize_style(
 			isset( $raw['style'] ) ? $raw['style'] : array(),
 			$button_defaults['style']
 		);
@@ -263,13 +263,13 @@ function fog_sanitize_config( $config ) {
 
 	// Layout.
 	$raw_layout                    = isset( $config['layout'] ) && is_array( $config['layout'] ) ? $config['layout'] : array();
-	$clean['layout']['alignment']  = fog_sanitize_allowed(
+	$clean['layout']['alignment']  = nfb_sanitize_allowed(
 		isset( $raw_layout['alignment'] ) ? $raw_layout['alignment'] : '',
 		array( 'flex-start', 'center', 'flex-end', 'space-between' ),
 		$defaults['layout']['alignment']
 	);
 	$clean['layout']['allowWrap']  = ! empty( $raw_layout['allowWrap'] );
-	$clean['layout']['wrapOverflow'] = fog_sanitize_allowed(
+	$clean['layout']['wrapOverflow'] = nfb_sanitize_allowed(
 		isset( $raw_layout['wrapOverflow'] ) ? $raw_layout['wrapOverflow'] : '',
 		array( 'scroll', 'shrink' ),
 		$defaults['layout']['wrapOverflow']
@@ -279,7 +279,7 @@ function fog_sanitize_config( $config ) {
 	// Auto-insert.
 	$raw_auto                          = isset( $config['autoInsert'] ) && is_array( $config['autoInsert'] ) ? $config['autoInsert'] : array();
 	$clean['autoInsert']['enabled']    = ! empty( $raw_auto['enabled'] );
-	$clean['autoInsert']['position']   = fog_sanitize_allowed(
+	$clean['autoInsert']['position']   = nfb_sanitize_allowed(
 		isset( $raw_auto['position'] ) ? $raw_auto['position'] : '',
 		array( 'before', 'after', 'both' ),
 		$defaults['autoInsert']['position']
@@ -311,7 +311,7 @@ function fog_sanitize_config( $config ) {
  * @param array $style Sanitized style array.
  * @return string Inline CSS declarations.
  */
-function fog_build_button_style( $style ) {
+function nfb_build_button_style( $style ) {
 	$declarations = array(
 		'background-color:' . $style['bgColor'],
 		'color:' . $style['textColor'],
@@ -331,7 +331,7 @@ function fog_build_button_style( $style ) {
  * @param array $layout Sanitized layout array.
  * @return string Inline CSS declarations.
  */
-function fog_build_container_style( $layout ) {
+function nfb_build_container_style( $layout ) {
 	$declarations = array(
 		'justify-content:' . $layout['alignment'],
 		'flex-wrap:' . ( $layout['allowWrap'] ? 'wrap' : 'nowrap' ),
@@ -357,7 +357,7 @@ function fog_build_container_style( $layout ) {
  * @param int $icon_id Attachment ID, or 0 for the default icon.
  * @return string Icon markup.
  */
-function fog_get_icon_markup( $icon_id ) {
+function nfb_get_icon_markup( $icon_id ) {
 	$icon_id = absint( $icon_id );
 
 	if ( $icon_id > 0 && wp_attachment_is_image( $icon_id ) ) {
@@ -366,7 +366,7 @@ function fog_get_icon_markup( $icon_id ) {
 			'thumbnail',
 			false,
 			array(
-				'class'       => 'fog-button__icon-img',
+				'class'       => 'nfb-button__icon-img',
 				'alt'         => '',
 				'aria-hidden' => 'true',
 				'loading'     => 'lazy',
@@ -374,11 +374,11 @@ function fog_get_icon_markup( $icon_id ) {
 		);
 
 		if ( $image ) {
-			return '<span class="fog-button__icon" aria-hidden="true">' . $image . '</span>';
+			return '<span class="nfb-button__icon" aria-hidden="true">' . $image . '</span>';
 		}
 	}
 
-	return '<span class="fog-button__icon" aria-hidden="true">'
+	return '<span class="nfb-button__icon" aria-hidden="true">'
 		. '<svg viewBox="0 0 24 24" width="18" height="18" focusable="false" role="presentation">'
 		. '<path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3Z" opacity=".15" />'
 		. '<path fill="currentColor" d="M12 6.5a5.5 5.5 0 1 0 5.4 6.6h-5.4v-2.1h7.6c.1.5.1 1 .1 1.5 0 4.1-2.7 7-6.9 7A5.6 5.6 0 0 1 6.4 12 5.6 5.6 0 0 1 12 6.5c1.5 0 2.8.5 3.8 1.5l-1.5 1.5a3.3 3.3 0 0 0-2.3-.9Z" />'
@@ -393,10 +393,10 @@ function fog_get_icon_markup( $icon_id ) {
  *                                   from get_block_wrapper_attributes().
  * @return string HTML, or an empty string when there is nothing to show.
  */
-function fog_render_buttons( $config, $wrapper_attributes = '' ) {
-	$config   = fog_sanitize_config( $config );
-	$prefixes = fog_get_url_prefixes();
-	$names    = fog_get_button_names();
+function nfb_render_buttons( $config, $wrapper_attributes = '' ) {
+	$config   = nfb_sanitize_config( $config );
+	$prefixes = nfb_get_url_prefixes();
+	$names    = nfb_get_button_names();
 
 	$active   = array();
 	$rejected = array();
@@ -406,7 +406,7 @@ function fog_render_buttons( $config, $wrapper_attributes = '' ) {
 			continue;
 		}
 
-		if ( fog_url_matches_prefix( $button['url'], $prefixes[ $key ] ) ) {
+		if ( nfb_url_matches_prefix( $button['url'], $prefixes[ $key ] ) ) {
 			$button['key']  = $key;
 			$active[]       = $button;
 		} else {
@@ -424,11 +424,11 @@ function fog_render_buttons( $config, $wrapper_attributes = '' ) {
 		return '';
 	}
 
-	$container_style = fog_build_container_style( $config['layout'] );
+	$container_style = nfb_build_container_style( $config['layout'] );
 	$target          = $config['layout']['openInNewTab'] ? ' target="_blank" rel="noopener noreferrer"' : '';
 
 	if ( '' === $wrapper_attributes ) {
-		$wrapper_attributes = 'class="wp-block-follow-on-google-buttons fog-buttons" style="'
+		$wrapper_attributes = 'class="wp-block-news-follow-buttons-buttons nfb-buttons" style="'
 			. esc_attr( $container_style ) . '"';
 	}
 
@@ -439,16 +439,16 @@ function fog_render_buttons( $config, $wrapper_attributes = '' ) {
 	$html = '<div ' . $wrapper_attributes . '>';
 
 	if ( $is_editor && ! empty( $rejected ) ) {
-		$html .= '<div class="fog-admin-notice" role="note"><strong>'
-			. esc_html__( 'Follow on Google Buttons:', 'follow-on-google' )
+		$html .= '<div class="nfb-admin-notice" role="note"><strong>'
+			. esc_html__( 'News Follow Buttons:', 'news-follow-buttons' )
 			. '</strong> '
-			. esc_html__( 'These buttons are hidden because their URLs are not valid Google links. Only you (as an editor) can see this notice.', 'follow-on-google' )
+			. esc_html__( 'These buttons are hidden because their URLs are not valid Google links. Only you (as an editor) can see this notice.', 'news-follow-buttons' )
 			. '<ul>';
 		foreach ( $rejected as $bad ) {
 			$html .= '<li>' . wp_kses(
 				sprintf(
 					/* translators: 1: button name, 2: required URL prefix. */
-					__( '%1$s must start with %2$s', 'follow-on-google' ),
+					__( '%1$s must start with %2$s', 'news-follow-buttons' ),
 					'<strong>' . esc_html( $bad['name'] ) . '</strong>',
 					'<code>' . esc_html( $bad['prefix'] ) . '</code>'
 				),
@@ -462,12 +462,12 @@ function fog_render_buttons( $config, $wrapper_attributes = '' ) {
 	}
 
 	foreach ( $active as $button ) {
-		$html .= '<a class="fog-button is-' . esc_attr( $button['key'] ) . esc_attr( $shrink_class ) . '"'
+		$html .= '<a class="nfb-button is-' . esc_attr( $button['key'] ) . esc_attr( $shrink_class ) . '"'
 			. ' href="' . esc_url( $button['url'] ) . '"'
-			. ' style="' . esc_attr( fog_build_button_style( $button['style'] ) ) . '"'
+			. ' style="' . esc_attr( nfb_build_button_style( $button['style'] ) ) . '"'
 			. $target . '>'
-			. fog_get_icon_markup( $button['iconId'] )
-			. '<span class="fog-button__label">' . esc_html( $button['label'] ) . '</span>'
+			. nfb_get_icon_markup( $button['iconId'] )
+			. '<span class="nfb-button__label">' . esc_html( $button['label'] ) . '</span>'
 			. '</a>';
 	}
 

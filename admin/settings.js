@@ -1,7 +1,7 @@
 /**
  * Settings page: media library icon picker.
  *
- * @package FollowOnGoogle
+ * @package NewsFollowButtons
  */
 ( function ( $ ) {
 	'use strict';
@@ -9,19 +9,19 @@
 	$( function () {
 		var frame = null;
 
-		$( '.fog-choose-icon' ).on( 'click', function ( event ) {
+		$( '.nfb-choose-icon' ).on( 'click', function ( event ) {
 			event.preventDefault();
 
-			var $field = $( this ).closest( '.fog-icon-field' );
+			var $field = $( this ).closest( '.nfb-icon-field' );
 
 			// A new frame per field keeps the selection scoped correctly.
 			frame = wp.media( {
-				title: window.fogAdminL10n
-					? window.fogAdminL10n.chooseIcon
+				title: window.nfbAdminL10n
+					? window.nfbAdminL10n.chooseIcon
 					: 'Choose icon',
 				button: {
-					text: window.fogAdminL10n
-						? window.fogAdminL10n.useIcon
+					text: window.nfbAdminL10n
+						? window.nfbAdminL10n.useIcon
 						: 'Use this icon',
 				},
 				library: { type: 'image' },
@@ -40,26 +40,26 @@
 						? attachment.sizes.thumbnail.url
 						: attachment.url;
 
-				$field.find( '.fog-icon-id' ).val( attachment.id );
+				$field.find( '.nfb-icon-id' ).val( attachment.id );
 				$field
-					.find( '.fog-icon-preview' )
+					.find( '.nfb-icon-preview' )
 					.html( $( '<img>' ).attr( { src: thumb, alt: '' } ) );
 			} );
 
 			frame.open();
 		} );
 
-		$( '.fog-clear-icon' ).on( 'click', function ( event ) {
+		$( '.nfb-clear-icon' ).on( 'click', function ( event ) {
 			event.preventDefault();
 
-			var $field = $( this ).closest( '.fog-icon-field' );
-			$field.find( '.fog-icon-id' ).val( 0 );
+			var $field = $( this ).closest( '.nfb-icon-field' );
+			$field.find( '.nfb-icon-id' ).val( 0 );
 			$field
-				.find( '.fog-icon-preview' )
+				.find( '.nfb-icon-preview' )
 				.html(
 					$( '<em>' ).text(
-						window.fogAdminL10n
-							? window.fogAdminL10n.defaultIcon
+						window.nfbAdminL10n
+							? window.nfbAdminL10n.defaultIcon
 							: 'Default Google icon'
 					)
 				);

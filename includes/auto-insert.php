@@ -5,7 +5,7 @@
  * Uses the global settings so a site owner configures the buttons once rather
  * than editing every page.
  *
- * @package FollowOnGoogle
+ * @package NewsFollowButtons
  */
 
 // Exit if accessed directly.
@@ -23,7 +23,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param array $settings Sanitized global settings.
  * @return bool Whether to insert.
  */
-function fog_should_auto_insert( $settings ) {
+function nfb_should_auto_insert( $settings ) {
 	if ( empty( $settings['autoInsert']['enabled'] ) ) {
 		return false;
 	}
@@ -63,8 +63,8 @@ function fog_should_auto_insert( $settings ) {
  *
  * @return void
  */
-function fog_enqueue_auto_insert_style() {
-	$settings = fog_get_settings();
+function nfb_enqueue_auto_insert_style() {
+	$settings = nfb_get_settings();
 
 	if ( empty( $settings['autoInsert']['enabled'] ) || ! is_singular() ) {
 		return;
@@ -77,8 +77,8 @@ function fog_enqueue_auto_insert_style() {
 
 	// The handle WordPress generates for the block's "style" field.
 	$handle = function_exists( 'generate_block_asset_handle' )
-		? generate_block_asset_handle( 'follow-on-google/buttons', 'style' )
-		: 'follow-on-google-buttons-style';
+		? generate_block_asset_handle( 'news-follow-buttons/buttons', 'style' )
+		: 'news-follow-buttons-buttons-style';
 
 	if ( wp_style_is( $handle, 'registered' ) ) {
 		wp_enqueue_style( $handle );
@@ -88,16 +88,16 @@ function fog_enqueue_auto_insert_style() {
 	// Fallback: load the compiled stylesheet directly if the block handle is
 	// unavailable for any reason (for example, the block failed to register).
 	$relative = 'build/style-index.css';
-	if ( file_exists( plugin_dir_path( FOG_PLUGIN_FILE ) . $relative ) ) {
+	if ( file_exists( plugin_dir_path( NFB_PLUGIN_FILE ) . $relative ) ) {
 		wp_enqueue_style(
-			'fog-buttons',
-			plugins_url( $relative, FOG_PLUGIN_FILE ),
+			'nfb-buttons',
+			plugins_url( $relative, NFB_PLUGIN_FILE ),
 			array(),
-			FOG_VERSION
+			NFB_VERSION
 		);
 	}
 }
-add_action( 'wp_enqueue_scripts', 'fog_enqueue_auto_insert_style' );
+add_action( 'wp_enqueue_scripts', 'nfb_enqueue_auto_insert_style' );
 
 /**
  * Append or prepend the buttons to post content.
@@ -105,21 +105,21 @@ add_action( 'wp_enqueue_scripts', 'fog_enqueue_auto_insert_style' );
  * @param string $content Post content.
  * @return string Filtered content.
  */
-function fog_auto_insert_buttons( $content ) {
+function nfb_auto_insert_buttons( $content ) {
 	// Guard against recursion if something re-applies the filter mid-render.
 	static $rendering = false;
 	if ( $rendering ) {
 		return $content;
 	}
 
-	$settings = fog_get_settings();
+	$settings = nfb_get_settings();
 
-	if ( ! fog_should_auto_insert( $settings ) ) {
+	if ( ! nfb_should_auto_insert( $settings ) ) {
 		return $content;
 	}
 
 	$rendering = true;
-	$buttons   = fog_render_buttons( $settings );
+	$buttons   = nfb_render_buttons( $settings );
 	$rendering = false;
 
 	if ( '' === $buttons ) {
@@ -138,4 +138,4 @@ function fog_auto_insert_buttons( $content ) {
 
 	return $content . $buttons;
 }
-add_filter( 'the_content', 'fog_auto_insert_buttons', 20 );
+add_filter( 'the_content', 'nfb_auto_insert_buttons', 20 );

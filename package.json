@@ -1,5 +1,5 @@
 {
-	"name": "follow-on-google",
+	"name": "news-follow-buttons",
 	"version": "1.3.0",
 	"description": "A customizable Gutenberg block with buttons linking to Google News, Discover, and preferred-source settings.",
 	"author": "Popa Zelu Andrei",
@@ -15,8 +15,8 @@
 		"lint:js": "wp-scripts lint-js",
 		"lint:css": "wp-scripts lint-style",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"make-pot": "npx @wordpress/env run cli wp i18n make-pot wp-content/plugins/follow-on-google wp-content/plugins/follow-on-google/languages/follow-on-google.pot --exclude=node_modules,vendor,build",
-		"make-json": "npx @wordpress/env run cli wp i18n make-json wp-content/plugins/follow-on-google/languages --no-purge",
+		"make-pot": "npx @wordpress/env run cli wp i18n make-pot wp-content/plugins/news-follow-buttons wp-content/plugins/news-follow-buttons/languages/news-follow-buttons.pot --exclude=node_modules,vendor,build",
+		"make-json": "npx @wordpress/env run cli wp i18n make-json wp-content/plugins/news-follow-buttons/languages --no-purge",
 		"env:start": "npx @wordpress/env start",
 		"env:stop": "npx @wordpress/env stop",
 		"env:clean": "npx @wordpress/env clean all",

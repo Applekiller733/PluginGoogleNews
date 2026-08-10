@@ -1,10 +1,10 @@
-=== Follow on Google Buttons ===
+=== News Follow Buttons ===
 Contributors: applekiller733
-Tags: google news, follow button, google discover, block, gutenberg
+Tags: follow button, news, block, gutenberg, publisher
 Requires at least: 6.4
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ A customizable block with buttons linking to Google News, Google Discover, and p
 
 == Description ==
 
-Follow on Google Buttons adds a single Gutenberg block that displays up to three
+News Follow Buttons adds a Gutenberg block that displays up to three
 customizable call-to-action buttons:
 
 * **Follow on Google News** — links to your Google News publication so signed-in
@@ -35,11 +35,28 @@ against hex/rgb/hsl formats, sizes are clamped to safe integer ranges, and
 font-weight and border-style are checked against fixed allowlists — so
 user-entered values cannot inject arbitrary CSS.
 
+= Source code and build process =
+
+The JavaScript in this plugin is compiled with @wordpress/scripts (webpack). The
+complete human-readable source is included in the /src directory of this plugin,
+and is also published at:
+https://github.com/Applekiller733/PluginGoogleNews
+
+To build from source: run `npm install` followed by `npm run build`. This
+compiles /src into the /build directory that WordPress loads at runtime. No
+minified or obfuscated code is included that is not reproducible from /src.
+
+= Disclaimer =
+
+This plugin is not affiliated with, endorsed by, or sponsored by Google. Google,
+Google News, and Google Discover are trademarks of Google LLC. This plugin
+simply creates links to those services.
+
 = Important note about what is (and isn't) possible =
 
 This plugin creates ordinary links styled as buttons. It does not — and cannot —
 programmatically add a site to a user's Google account, alter search ranking, or
-change personalization. No public Google API exposes that. The "Follow on Google
+change personalization. No public Google API exposes that. The "News Follow
 News" action is a genuine one-click follow for signed-in users; the other two
 buttons are best-effort links to Google surfaces or help pages, because Google
 does not provide one-click URLs for them.
@@ -55,7 +72,7 @@ This is the source distribution. The block must be compiled once before use.
    `/wp-content/plugins/`, or run `npm run plugin-zip` to produce a
    ready-to-install zip.
 4. Activate the plugin through the 'Plugins' screen.
-5. Edit any page or post, add the "Follow on Google Buttons" block, and configure
+5. Edit any page or post, add the "News Follow Buttons" block, and configure
    your URLs, labels, and styling in the block settings sidebar.
 
 For development, run `npm run start` to rebuild automatically on save.
@@ -74,6 +91,21 @@ Google News button field.
 No. Preferred source is a setting the user chooses inside Google Search. The
 button can only link them to the relevant Google page or your own instructions.
 
+= Can the buttons appear on every post without editing each one? =
+
+Yes. Go to Settings -> News Follow, configure the buttons once, tick
+"Automatically add the buttons to content", choose a position and which post
+types it applies to. Blocks you place manually keep their own settings and are
+unaffected.
+
+= Can I use my own icons? =
+
+Yes. Each button can use any image from your media library, chosen in the block
+sidebar or on the settings page. Leave it unset to use the built-in Google
+glyph. Note that WordPress does not allow SVG uploads by default for security
+reasons; use PNG or another raster format unless you have deliberately enabled
+SVG support.
+
 = Does it work with the Classic Editor? =
 
 This version ships a Gutenberg block. A shortcode fallback may be added in a
@@ -85,6 +117,13 @@ future release.
 2. The block settings sidebar with per-button controls.
 
 == Changelog ==
+
+= 1.3.0 =
+* Added automatic insertion: buttons can be added before and/or after content
+  on chosen post types, configured once on a global settings page.
+* Added custom icons per button, selected from the media library.
+* Added layout controls: force buttons onto a single row (with scroll or shrink
+  on overflow) and a new "spread across the row" alignment.
 
 = 1.2.0 =
 * Added strict URL validation: each button only renders when its URL begins
@@ -103,6 +142,10 @@ future release.
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+Adds global auto-insertion, custom media-library icons, and single-row layout
+controls.
 
 = 1.2.0 =
 Buttons now require valid Google URLs; invalid ones are hidden with an

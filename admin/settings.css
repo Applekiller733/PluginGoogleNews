@@ -1,7 +1,7 @@
 /**
  * Settings page styles.
  */
-.fog-settings .fog-button-fieldset {
+.nfb-settings .nfb-button-fieldset {
 	background: #fff;
 	border: 1px solid #c3c4c7;
 	border-radius: 4px;
@@ -10,17 +10,17 @@
 	max-width: 900px;
 }
 
-.fog-settings .fog-button-fieldset h3 {
+.nfb-settings .nfb-button-fieldset h3 {
 	margin-top: 8px;
 }
 
-.fog-settings .fog-style-grid {
+.nfb-settings .nfb-style-grid {
 	display: grid;
 	grid-template-columns: repeat( auto-fit, minmax( 180px, 1fr ) );
 	gap: 0 20px;
 }
 
-.fog-settings .fog-icon-field .fog-icon-preview {
+.nfb-settings .nfb-icon-field .nfb-icon-preview {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -34,13 +34,13 @@
 	background: #f6f7f7;
 }
 
-.fog-settings .fog-icon-field .fog-icon-preview img {
+.nfb-settings .nfb-icon-field .nfb-icon-preview img {
 	max-width: 32px;
 	max-height: 32px;
 	display: block;
 }
 
-.fog-settings .fog-color-input {
+.nfb-settings .nfb-color-input {
 	width: 100%;
 	max-width: 160px;
 }

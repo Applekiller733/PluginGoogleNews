@@ -1,7 +1,7 @@
 /**
- * Editor component for the Follow on Google Buttons block.
+ * Editor component for the News Follow Buttons block.
  *
- * @package FollowOnGoogle
+ * @package NewsFollowButtons
  */
 
 import { __ } from '@wordpress/i18n';
@@ -49,20 +49,20 @@ function urlMatchesPrefix( url, prefix ) {
 }
 
 const FONT_WEIGHTS = [
-	{ label: __( 'Light (300)', 'follow-on-google' ), value: '300' },
-	{ label: __( 'Regular (400)', 'follow-on-google' ), value: '400' },
-	{ label: __( 'Medium (500)', 'follow-on-google' ), value: '500' },
-	{ label: __( 'Semibold (600)', 'follow-on-google' ), value: '600' },
-	{ label: __( 'Bold (700)', 'follow-on-google' ), value: '700' },
-	{ label: __( 'Extrabold (800)', 'follow-on-google' ), value: '800' },
+	{ label: __( 'Light (300)', 'news-follow-buttons' ), value: '300' },
+	{ label: __( 'Regular (400)', 'news-follow-buttons' ), value: '400' },
+	{ label: __( 'Medium (500)', 'news-follow-buttons' ), value: '500' },
+	{ label: __( 'Semibold (600)', 'news-follow-buttons' ), value: '600' },
+	{ label: __( 'Bold (700)', 'news-follow-buttons' ), value: '700' },
+	{ label: __( 'Extrabold (800)', 'news-follow-buttons' ), value: '800' },
 ];
 
 const BORDER_STYLES = [
-	{ label: __( 'Solid', 'follow-on-google' ), value: 'solid' },
-	{ label: __( 'Dashed', 'follow-on-google' ), value: 'dashed' },
-	{ label: __( 'Dotted', 'follow-on-google' ), value: 'dotted' },
-	{ label: __( 'Double', 'follow-on-google' ), value: 'double' },
-	{ label: __( 'None', 'follow-on-google' ), value: 'none' },
+	{ label: __( 'Solid', 'news-follow-buttons' ), value: 'solid' },
+	{ label: __( 'Dashed', 'news-follow-buttons' ), value: 'dashed' },
+	{ label: __( 'Dotted', 'news-follow-buttons' ), value: 'dotted' },
+	{ label: __( 'Double', 'news-follow-buttons' ), value: 'double' },
+	{ label: __( 'None', 'news-follow-buttons' ), value: 'none' },
 ];
 
 /**
@@ -96,13 +96,13 @@ function IconPicker( { iconKey, iconId, setAttributes } ) {
 	);
 
 	return (
-		<div className="fog-icon-picker">
-			<p className="fog-icon-picker__label">
-				<strong>{ __( 'Icon', 'follow-on-google' ) }</strong>
+		<div className="nfb-icon-picker">
+			<p className="nfb-icon-picker__label">
+				<strong>{ __( 'Icon', 'news-follow-buttons' ) }</strong>
 			</p>
 			{ iconUrl && (
 				<img
-					className="fog-icon-picker__preview"
+					className="nfb-icon-picker__preview"
 					src={ iconUrl }
 					alt=""
 				/>
@@ -117,8 +117,8 @@ function IconPicker( { iconKey, iconId, setAttributes } ) {
 					render={ ( { open } ) => (
 						<Button variant="secondary" onClick={ open }>
 							{ iconId
-								? __( 'Replace icon', 'follow-on-google' )
-								: __( 'Choose icon', 'follow-on-google' ) }
+								? __( 'Replace icon', 'news-follow-buttons' )
+								: __( 'Choose icon', 'news-follow-buttons' ) }
 						</Button>
 					) }
 				/>
@@ -129,7 +129,7 @@ function IconPicker( { iconKey, iconId, setAttributes } ) {
 					isDestructive
 					onClick={ () => setAttributes( { [ iconKey ]: 0 } ) }
 				>
-					{ __( 'Use default', 'follow-on-google' ) }
+					{ __( 'Use default', 'news-follow-buttons' ) }
 				</Button>
 			) }
 		</div>
@@ -153,48 +153,48 @@ function StyleControls( { styleKey, style = {}, setAttributes } ) {
 	return (
 		<>
 			<PanelColorSettings
-				title={ __( 'Colors', 'follow-on-google' ) }
+				title={ __( 'Colors', 'news-follow-buttons' ) }
 				initialOpen={ false }
 				colorSettings={ [
 					{
 						value: style.bgColor,
 						onChange: ( value ) => set( 'bgColor', value ),
-						label: __( 'Background', 'follow-on-google' ),
+						label: __( 'Background', 'news-follow-buttons' ),
 					},
 					{
 						value: style.textColor,
 						onChange: ( value ) => set( 'textColor', value ),
-						label: __( 'Text', 'follow-on-google' ),
+						label: __( 'Text', 'news-follow-buttons' ),
 					},
 					{
 						value: style.borderColor,
 						onChange: ( value ) => set( 'borderColor', value ),
-						label: __( 'Border', 'follow-on-google' ),
+						label: __( 'Border', 'news-follow-buttons' ),
 					},
 				] }
 			/>
 			<RangeControl
-				label={ __( 'Font size (px)', 'follow-on-google' ) }
+				label={ __( 'Font size (px)', 'news-follow-buttons' ) }
 				value={ style.fontSize }
 				onChange={ ( value ) => set( 'fontSize', value ) }
 				min={ 8 }
 				max={ 72 }
 			/>
 			<SelectControl
-				label={ __( 'Font weight', 'follow-on-google' ) }
+				label={ __( 'Font weight', 'news-follow-buttons' ) }
 				value={ style.fontWeight }
 				options={ FONT_WEIGHTS }
 				onChange={ ( value ) => set( 'fontWeight', value ) }
 			/>
 			<RangeControl
-				label={ __( 'Border width (px)', 'follow-on-google' ) }
+				label={ __( 'Border width (px)', 'news-follow-buttons' ) }
 				value={ style.borderWidth }
 				onChange={ ( value ) => set( 'borderWidth', value ) }
 				min={ 0 }
 				max={ 12 }
 			/>
 			<SelectControl
-				label={ __( 'Border style', 'follow-on-google' ) }
+				label={ __( 'Border style', 'news-follow-buttons' ) }
 				value={ style.borderStyle }
 				options={ BORDER_STYLES }
 				onChange={ ( value ) => set( 'borderStyle', value ) }
@@ -223,7 +223,7 @@ function ButtonControls( {
 	return (
 		<PanelBody title={ title } initialOpen={ false }>
 			<ToggleControl
-				label={ __( 'Show this button', 'follow-on-google' ) }
+				label={ __( 'Show this button', 'news-follow-buttons' ) }
 				checked={ attributes[ showKey ] }
 				onChange={ ( value ) =>
 					setAttributes( { [ showKey ]: value } )
@@ -232,7 +232,7 @@ function ButtonControls( {
 			{ attributes[ showKey ] && (
 				<>
 					<TextControl
-						label={ __( 'URL', 'follow-on-google' ) }
+						label={ __( 'URL', 'news-follow-buttons' ) }
 						value={ attributes[ urlKey ] }
 						help={ urlHelp }
 						type="url"
@@ -251,13 +251,13 @@ function ButtonControls( {
 							>
 								{ __(
 									'This URL will be rejected on the front end. It must start with:',
-									'follow-on-google'
+									'news-follow-buttons'
 								) }{ ' ' }
 								<code>{ URL_PREFIXES[ showKey ] }</code>
 							</Notice>
 						) }
 					<TextControl
-						label={ __( 'Button label', 'follow-on-google' ) }
+						label={ __( 'Button label', 'news-follow-buttons' ) }
 						value={ attributes[ labelKey ] }
 						onChange={ ( value ) =>
 							setAttributes( { [ labelKey ]: value } )
@@ -315,7 +315,7 @@ export default function Edit( { attributes, setAttributes } ) {
 	const { alignment, allowWrap, wrapOverflow, openInNewTab } = attributes;
 
 	const blockProps = useBlockProps( {
-		className: 'fog-buttons',
+		className: 'nfb-buttons',
 		style: {
 			justifyContent: alignment,
 			flexWrap: allowWrap ? 'wrap' : 'nowrap',
@@ -357,36 +357,36 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Layout', 'follow-on-google' ) }
+					title={ __( 'Layout', 'news-follow-buttons' ) }
 					initialOpen={ true }
 				>
 					<SelectControl
-						label={ __( 'Alignment', 'follow-on-google' ) }
+						label={ __( 'Alignment', 'news-follow-buttons' ) }
 						value={ alignment }
 						options={ [
 							{
-								label: __( 'Left', 'follow-on-google' ),
+								label: __( 'Left', 'news-follow-buttons' ),
 								value: 'flex-start',
 							},
 							{
-								label: __( 'Center', 'follow-on-google' ),
+								label: __( 'Center', 'news-follow-buttons' ),
 								value: 'center',
 							},
 							{
-								label: __( 'Right', 'follow-on-google' ),
+								label: __( 'Right', 'news-follow-buttons' ),
 								value: 'flex-end',
 							},
 							{
 								label: __(
 									'Spread across the row',
-									'follow-on-google'
+									'news-follow-buttons'
 								),
 								value: 'space-between',
 							},
 						] }
 						help={ __(
 							'Alignment applies to every row, so a button pushed onto a second row follows the same alignment.',
-							'follow-on-google'
+							'news-follow-buttons'
 						) }
 						onChange={ ( value ) =>
 							setAttributes( { alignment: value } )
@@ -395,12 +395,12 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ToggleControl
 						label={ __(
 							'Allow buttons to wrap onto multiple rows',
-							'follow-on-google'
+							'news-follow-buttons'
 						) }
 						checked={ allowWrap }
 						help={ __(
 							'Turn off to force all buttons onto a single row.',
-							'follow-on-google'
+							'news-follow-buttons'
 						) }
 						onChange={ ( value ) =>
 							setAttributes( { allowWrap: value } )
@@ -410,21 +410,21 @@ export default function Edit( { attributes, setAttributes } ) {
 						<SelectControl
 							label={ __(
 								'If the row overflows',
-								'follow-on-google'
+								'news-follow-buttons'
 							) }
 							value={ wrapOverflow }
 							options={ [
 								{
 									label: __(
 										'Scroll horizontally',
-										'follow-on-google'
+										'news-follow-buttons'
 									),
 									value: 'scroll',
 								},
 								{
 									label: __(
 										'Shrink buttons to fit',
-										'follow-on-google'
+										'news-follow-buttons'
 									),
 									value: 'shrink',
 								},
@@ -437,7 +437,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ToggleControl
 						label={ __(
 							'Open links in a new tab',
-							'follow-on-google'
+							'news-follow-buttons'
 						) }
 						checked={ openInNewTab }
 						onChange={ ( value ) =>
@@ -447,7 +447,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				</PanelBody>
 
 				<ButtonControls
-					title={ __( 'Google News button', 'follow-on-google' ) }
+					title={ __( 'Google News button', 'news-follow-buttons' ) }
 					showKey="showNews"
 					urlKey="newsUrl"
 					labelKey="newsLabel"
@@ -455,13 +455,13 @@ export default function Edit( { attributes, setAttributes } ) {
 					iconKey="newsIconId"
 					urlHelp={ __(
 						'Your Google News publication URL from Publisher Center.',
-						'follow-on-google'
+						'news-follow-buttons'
 					) }
 					attributes={ attributes }
 					setAttributes={ setAttributes }
 				/>
 				<ButtonControls
-					title={ __( 'Google Discover button', 'follow-on-google' ) }
+					title={ __( 'Google Discover button', 'news-follow-buttons' ) }
 					showKey="showDiscover"
 					urlKey="discoverUrl"
 					labelKey="discoverLabel"
@@ -469,7 +469,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					iconKey="discoverIconId"
 					urlHelp={ __(
 						'Google Discover has no per-site follow URL. Point this at your News publication or a help page.',
-						'follow-on-google'
+						'news-follow-buttons'
 					) }
 					attributes={ attributes }
 					setAttributes={ setAttributes }
@@ -477,7 +477,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				<ButtonControls
 					title={ __(
 						'Preferred source button',
-						'follow-on-google'
+						'news-follow-buttons'
 					) }
 					showKey="showPreferred"
 					urlKey="preferredUrl"
@@ -486,7 +486,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					iconKey="preferredIconId"
 					urlHelp={ __(
 						'Preferred source is a user setting in Google Search. Link to a how-to or Google settings page.',
-						'follow-on-google'
+						'news-follow-buttons'
 					) }
 					attributes={ attributes }
 					setAttributes={ setAttributes }
@@ -495,20 +495,20 @@ export default function Edit( { attributes, setAttributes } ) {
 
 			<div { ...blockProps }>
 				{ previewButtons.length === 0 && (
-					<p className="fog-empty">
+					<p className="nfb-empty">
 						{ __(
 							'No buttons to show yet. Enable a button and enter a valid Google URL in the block settings.',
-							'follow-on-google'
+							'news-follow-buttons'
 						) }
 					</p>
 				) }
 				{ previewButtons.map( ( button ) => (
 					<span
 						key={ button.mod }
-						className={ `fog-button ${ button.mod }` }
+						className={ `nfb-button ${ button.mod }` }
 						style={ toPreviewStyle( button.style ) }
 					>
-						<span className="fog-button__label">
+						<span className="nfb-button__label">
 							{ button.label }
 						</span>
 					</span>

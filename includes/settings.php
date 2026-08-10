@@ -2,11 +2,11 @@
 /**
  * Global settings page.
  *
- * Stores one option (fog_settings) using the shared config shape from
+ * Stores one option (nfb_settings) using the shared config shape from
  * includes/config.php. These settings drive the auto-insert feature, so a site
  * owner configures the buttons once instead of per page.
  *
- * @package FollowOnGoogle
+ * @package NewsFollowButtons
  */
 
 // Exit if accessed directly.
@@ -14,16 +14,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-const FOG_OPTION_NAME = 'fog_settings';
+const NFB_OPTION_NAME = 'nfb_settings';
 
 /**
  * Get the stored global settings, merged over defaults.
  *
  * @return array Sanitized config.
  */
-function fog_get_settings() {
-	$stored = get_option( FOG_OPTION_NAME, array() );
-	return fog_sanitize_config( is_array( $stored ) ? $stored : array() );
+function nfb_get_settings() {
+	$stored = get_option( NFB_OPTION_NAME, array() );
+	return nfb_sanitize_config( is_array( $stored ) ? $stored : array() );
 }
 
 /**
@@ -31,34 +31,34 @@ function fog_get_settings() {
  *
  * @return void
  */
-function fog_register_settings() {
+function nfb_register_settings() {
 	register_setting(
-		'fog_settings_group',
-		FOG_OPTION_NAME,
+		'nfb_settings_group',
+		NFB_OPTION_NAME,
 		array(
 			'type'              => 'array',
-			'sanitize_callback' => 'fog_sanitize_config',
-			'default'           => fog_get_default_config(),
+			'sanitize_callback' => 'nfb_sanitize_config',
+			'default'           => nfb_get_default_config(),
 		)
 	);
 }
-add_action( 'admin_init', 'fog_register_settings' );
+add_action( 'admin_init', 'nfb_register_settings' );
 
 /**
  * Add the settings page under the Settings menu.
  *
  * @return void
  */
-function fog_add_settings_page() {
+function nfb_add_settings_page() {
 	add_options_page(
-		__( 'Follow on Google Buttons', 'follow-on-google' ),
-		__( 'Follow on Google', 'follow-on-google' ),
+		__( 'News Follow Buttons', 'news-follow-buttons' ),
+		__( 'News Follow', 'news-follow-buttons' ),
 		'manage_options',
-		'follow-on-google',
-		'fog_render_settings_page'
+		'news-follow-buttons',
+		'nfb_render_settings_page'
 	);
 }
-add_action( 'admin_menu', 'fog_add_settings_page' );
+add_action( 'admin_menu', 'nfb_add_settings_page' );
 
 /**
  * Enqueue the media picker and admin script on our settings page only.
@@ -66,39 +66,39 @@ add_action( 'admin_menu', 'fog_add_settings_page' );
  * @param string $hook Current admin page hook.
  * @return void
  */
-function fog_enqueue_admin_assets( $hook ) {
-	if ( 'settings_page_follow-on-google' !== $hook ) {
+function nfb_enqueue_admin_assets( $hook ) {
+	if ( 'settings_page_news-follow-buttons' !== $hook ) {
 		return;
 	}
 
 	wp_enqueue_media();
 
 	wp_enqueue_script(
-		'fog-admin',
-		plugins_url( 'admin/settings.js', FOG_PLUGIN_FILE ),
+		'nfb-admin',
+		plugins_url( 'admin/settings.js', NFB_PLUGIN_FILE ),
 		array( 'jquery' ),
-		FOG_VERSION,
+		NFB_VERSION,
 		true
 	);
 
 	wp_enqueue_style(
-		'fog-admin',
-		plugins_url( 'admin/settings.css', FOG_PLUGIN_FILE ),
+		'nfb-admin',
+		plugins_url( 'admin/settings.css', NFB_PLUGIN_FILE ),
 		array(),
-		FOG_VERSION
+		NFB_VERSION
 	);
 
 	wp_localize_script(
-		'fog-admin',
-		'fogAdminL10n',
+		'nfb-admin',
+		'nfbAdminL10n',
 		array(
-			'chooseIcon'  => __( 'Choose icon', 'follow-on-google' ),
-			'useIcon'     => __( 'Use this icon', 'follow-on-google' ),
-			'defaultIcon' => __( 'Default Google icon', 'follow-on-google' ),
+			'chooseIcon'  => __( 'Choose icon', 'news-follow-buttons' ),
+			'useIcon'     => __( 'Use this icon', 'news-follow-buttons' ),
+			'defaultIcon' => __( 'Default Google icon', 'news-follow-buttons' ),
 		)
 	);
 }
-add_action( 'admin_enqueue_scripts', 'fog_enqueue_admin_assets' );
+add_action( 'admin_enqueue_scripts', 'nfb_enqueue_admin_assets' );
 
 /**
  * Render one button's fieldset on the settings page.
@@ -109,12 +109,12 @@ add_action( 'admin_enqueue_scripts', 'fog_enqueue_admin_assets' );
  * @param string $prefix   Required URL prefix, shown as help text.
  * @return void
  */
-function fog_render_button_fields( $key, $title, $button, $prefix ) {
-	$name_base = FOG_OPTION_NAME . '[buttons][' . $key . ']';
+function nfb_render_button_fields( $key, $title, $button, $prefix ) {
+	$name_base = NFB_OPTION_NAME . '[buttons][' . $key . ']';
 	$icon_id   = absint( $button['iconId'] );
 	$icon_url  = $icon_id ? wp_get_attachment_image_url( $icon_id, 'thumbnail' ) : '';
 	?>
-	<fieldset class="fog-button-fieldset">
+	<fieldset class="nfb-button-fieldset">
 		<h3><?php echo esc_html( $title ); ?></h3>
 
 		<p>
@@ -122,12 +122,12 @@ function fog_render_button_fields( $key, $title, $button, $prefix ) {
 				<input type="checkbox"
 					name="<?php echo esc_attr( $name_base ); ?>[enabled]"
 					value="1" <?php checked( $button['enabled'] ); ?> />
-				<?php esc_html_e( 'Show this button', 'follow-on-google' ); ?>
+				<?php esc_html_e( 'Show this button', 'news-follow-buttons' ); ?>
 			</label>
 		</p>
 
 		<p>
-			<label for="<?php echo esc_attr( $key ); ?>-url"><strong><?php esc_html_e( 'URL', 'follow-on-google' ); ?></strong></label><br />
+			<label for="<?php echo esc_attr( $key ); ?>-url"><strong><?php esc_html_e( 'URL', 'news-follow-buttons' ); ?></strong></label><br />
 			<input type="url" class="regular-text" id="<?php echo esc_attr( $key ); ?>-url"
 				name="<?php echo esc_attr( $name_base ); ?>[url]"
 				value="<?php echo esc_attr( $button['url'] ); ?>" /><br />
@@ -135,7 +135,7 @@ function fog_render_button_fields( $key, $title, $button, $prefix ) {
 				<?php
 				printf(
 					/* translators: %s: required URL prefix. */
-					esc_html__( 'Must start with %s', 'follow-on-google' ),
+					esc_html__( 'Must start with %s', 'news-follow-buttons' ),
 					'<code>' . esc_html( $prefix ) . '</code>'
 				);
 				?>
@@ -143,40 +143,40 @@ function fog_render_button_fields( $key, $title, $button, $prefix ) {
 		</p>
 
 		<p>
-			<label for="<?php echo esc_attr( $key ); ?>-label"><strong><?php esc_html_e( 'Button label', 'follow-on-google' ); ?></strong></label><br />
+			<label for="<?php echo esc_attr( $key ); ?>-label"><strong><?php esc_html_e( 'Button label', 'news-follow-buttons' ); ?></strong></label><br />
 			<input type="text" class="regular-text" id="<?php echo esc_attr( $key ); ?>-label"
 				name="<?php echo esc_attr( $name_base ); ?>[label]"
 				value="<?php echo esc_attr( $button['label'] ); ?>" />
 		</p>
 
-		<p class="fog-icon-field">
-			<strong><?php esc_html_e( 'Icon', 'follow-on-google' ); ?></strong><br />
-			<span class="fog-icon-preview">
+		<p class="nfb-icon-field">
+			<strong><?php esc_html_e( 'Icon', 'news-follow-buttons' ); ?></strong><br />
+			<span class="nfb-icon-preview">
 				<?php if ( $icon_url ) : ?>
 					<img src="<?php echo esc_url( $icon_url ); ?>" alt="" />
 				<?php else : ?>
-					<em><?php esc_html_e( 'Default Google icon', 'follow-on-google' ); ?></em>
+					<em><?php esc_html_e( 'Default Google icon', 'news-follow-buttons' ); ?></em>
 				<?php endif; ?>
 			</span>
-			<input type="hidden" class="fog-icon-id"
+			<input type="hidden" class="nfb-icon-id"
 				name="<?php echo esc_attr( $name_base ); ?>[iconId]"
 				value="<?php echo esc_attr( $icon_id ); ?>" />
-			<button type="button" class="button fog-choose-icon"><?php esc_html_e( 'Choose icon', 'follow-on-google' ); ?></button>
-			<button type="button" class="button fog-clear-icon"><?php esc_html_e( 'Use default', 'follow-on-google' ); ?></button>
+			<button type="button" class="button nfb-choose-icon"><?php esc_html_e( 'Choose icon', 'news-follow-buttons' ); ?></button>
+			<button type="button" class="button nfb-clear-icon"><?php esc_html_e( 'Use default', 'news-follow-buttons' ); ?></button>
 		</p>
 
 		<?php
 		$style_fields = array(
-			'bgColor'     => __( 'Background color', 'follow-on-google' ),
-			'textColor'   => __( 'Text color', 'follow-on-google' ),
-			'borderColor' => __( 'Border color', 'follow-on-google' ),
+			'bgColor'     => __( 'Background color', 'news-follow-buttons' ),
+			'textColor'   => __( 'Text color', 'news-follow-buttons' ),
+			'borderColor' => __( 'Border color', 'news-follow-buttons' ),
 		);
 		?>
-		<div class="fog-style-grid">
+		<div class="nfb-style-grid">
 			<?php foreach ( $style_fields as $field => $field_label ) : ?>
 				<p>
 					<label><strong><?php echo esc_html( $field_label ); ?></strong></label><br />
-					<input type="text" class="fog-color-input"
+					<input type="text" class="nfb-color-input"
 						name="<?php echo esc_attr( $name_base ); ?>[style][<?php echo esc_attr( $field ); ?>]"
 						value="<?php echo esc_attr( $button['style'][ $field ] ); ?>"
 						placeholder="#000000" />
@@ -184,14 +184,14 @@ function fog_render_button_fields( $key, $title, $button, $prefix ) {
 			<?php endforeach; ?>
 
 			<p>
-				<label><strong><?php esc_html_e( 'Font size (px)', 'follow-on-google' ); ?></strong></label><br />
+				<label><strong><?php esc_html_e( 'Font size (px)', 'news-follow-buttons' ); ?></strong></label><br />
 				<input type="number" min="8" max="72"
 					name="<?php echo esc_attr( $name_base ); ?>[style][fontSize]"
 					value="<?php echo esc_attr( $button['style']['fontSize'] ); ?>" />
 			</p>
 
 			<p>
-				<label><strong><?php esc_html_e( 'Font weight', 'follow-on-google' ); ?></strong></label><br />
+				<label><strong><?php esc_html_e( 'Font weight', 'news-follow-buttons' ); ?></strong></label><br />
 				<select name="<?php echo esc_attr( $name_base ); ?>[style][fontWeight]">
 					<?php foreach ( array( '300', '400', '500', '600', '700', '800' ) as $weight ) : ?>
 						<option value="<?php echo esc_attr( $weight ); ?>" <?php selected( $button['style']['fontWeight'], $weight ); ?>>
@@ -202,14 +202,14 @@ function fog_render_button_fields( $key, $title, $button, $prefix ) {
 			</p>
 
 			<p>
-				<label><strong><?php esc_html_e( 'Border width (px)', 'follow-on-google' ); ?></strong></label><br />
+				<label><strong><?php esc_html_e( 'Border width (px)', 'news-follow-buttons' ); ?></strong></label><br />
 				<input type="number" min="0" max="12"
 					name="<?php echo esc_attr( $name_base ); ?>[style][borderWidth]"
 					value="<?php echo esc_attr( $button['style']['borderWidth'] ); ?>" />
 			</p>
 
 			<p>
-				<label><strong><?php esc_html_e( 'Border style', 'follow-on-google' ); ?></strong></label><br />
+				<label><strong><?php esc_html_e( 'Border style', 'news-follow-buttons' ); ?></strong></label><br />
 				<select name="<?php echo esc_attr( $name_base ); ?>[style][borderStyle]">
 					<?php foreach ( array( 'solid', 'dashed', 'dotted', 'double', 'none' ) as $bstyle ) : ?>
 						<option value="<?php echo esc_attr( $bstyle ); ?>" <?php selected( $button['style']['borderStyle'], $bstyle ); ?>>
@@ -228,56 +228,56 @@ function fog_render_button_fields( $key, $title, $button, $prefix ) {
  *
  * @return void
  */
-function fog_render_settings_page() {
+function nfb_render_settings_page() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
 
-	$settings = fog_get_settings();
-	$prefixes = fog_get_url_prefixes();
-	$names    = fog_get_button_names();
+	$settings = nfb_get_settings();
+	$prefixes = nfb_get_url_prefixes();
+	$names    = nfb_get_button_names();
 	?>
-	<div class="wrap fog-settings">
-		<h1><?php esc_html_e( 'Follow on Google Buttons', 'follow-on-google' ); ?></h1>
+	<div class="wrap nfb-settings">
+		<h1><?php esc_html_e( 'News Follow Buttons', 'news-follow-buttons' ); ?></h1>
 
 		<p class="description">
-			<?php esc_html_e( 'These settings control the buttons that are inserted automatically. Blocks you place manually keep their own settings.', 'follow-on-google' ); ?>
+			<?php esc_html_e( 'These settings control the buttons that are inserted automatically. Blocks you place manually keep their own settings.', 'news-follow-buttons' ); ?>
 		</p>
 
 		<form method="post" action="options.php">
-			<?php settings_fields( 'fog_settings_group' ); ?>
+			<?php settings_fields( 'nfb_settings_group' ); ?>
 
-			<h2><?php esc_html_e( 'Automatic insertion', 'follow-on-google' ); ?></h2>
+			<h2><?php esc_html_e( 'Automatic insertion', 'news-follow-buttons' ); ?></h2>
 			<table class="form-table" role="presentation">
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Enable', 'follow-on-google' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Enable', 'news-follow-buttons' ); ?></th>
 					<td>
 						<label>
 							<input type="checkbox"
-								name="<?php echo esc_attr( FOG_OPTION_NAME ); ?>[autoInsert][enabled]"
+								name="<?php echo esc_attr( NFB_OPTION_NAME ); ?>[autoInsert][enabled]"
 								value="1" <?php checked( $settings['autoInsert']['enabled'] ); ?> />
-							<?php esc_html_e( 'Automatically add the buttons to content', 'follow-on-google' ); ?>
+							<?php esc_html_e( 'Automatically add the buttons to content', 'news-follow-buttons' ); ?>
 						</label>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Position', 'follow-on-google' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Position', 'news-follow-buttons' ); ?></th>
 					<td>
-						<select name="<?php echo esc_attr( FOG_OPTION_NAME ); ?>[autoInsert][position]">
+						<select name="<?php echo esc_attr( NFB_OPTION_NAME ); ?>[autoInsert][position]">
 							<option value="before" <?php selected( $settings['autoInsert']['position'], 'before' ); ?>>
-								<?php esc_html_e( 'Before the content', 'follow-on-google' ); ?>
+								<?php esc_html_e( 'Before the content', 'news-follow-buttons' ); ?>
 							</option>
 							<option value="after" <?php selected( $settings['autoInsert']['position'], 'after' ); ?>>
-								<?php esc_html_e( 'After the content', 'follow-on-google' ); ?>
+								<?php esc_html_e( 'After the content', 'news-follow-buttons' ); ?>
 							</option>
 							<option value="both" <?php selected( $settings['autoInsert']['position'], 'both' ); ?>>
-								<?php esc_html_e( 'Both before and after', 'follow-on-google' ); ?>
+								<?php esc_html_e( 'Both before and after', 'news-follow-buttons' ); ?>
 							</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Apply to', 'follow-on-google' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Apply to', 'news-follow-buttons' ); ?></th>
 					<td>
 						<?php
 						$public_types = get_post_types( array( 'public' => true ), 'objects' );
@@ -288,7 +288,7 @@ function fog_render_settings_page() {
 							?>
 							<label style="display:block;margin-bottom:4px;">
 								<input type="checkbox"
-									name="<?php echo esc_attr( FOG_OPTION_NAME ); ?>[autoInsert][postTypes][]"
+									name="<?php echo esc_attr( NFB_OPTION_NAME ); ?>[autoInsert][postTypes][]"
 									value="<?php echo esc_attr( $type->name ); ?>"
 									<?php checked( in_array( $type->name, $settings['autoInsert']['postTypes'], true ) ); ?> />
 								<?php echo esc_html( $type->labels->name ); ?>
@@ -298,18 +298,18 @@ function fog_render_settings_page() {
 				</tr>
 			</table>
 
-			<h2><?php esc_html_e( 'Layout', 'follow-on-google' ); ?></h2>
+			<h2><?php esc_html_e( 'Layout', 'news-follow-buttons' ); ?></h2>
 			<table class="form-table" role="presentation">
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Horizontal alignment', 'follow-on-google' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Horizontal alignment', 'news-follow-buttons' ); ?></th>
 					<td>
-						<select name="<?php echo esc_attr( FOG_OPTION_NAME ); ?>[layout][alignment]">
+						<select name="<?php echo esc_attr( NFB_OPTION_NAME ); ?>[layout][alignment]">
 							<?php
 							$alignments = array(
-								'flex-start'    => __( 'Left', 'follow-on-google' ),
-								'center'        => __( 'Center', 'follow-on-google' ),
-								'flex-end'      => __( 'Right', 'follow-on-google' ),
-								'space-between' => __( 'Spread across the row', 'follow-on-google' ),
+								'flex-start'    => __( 'Left', 'news-follow-buttons' ),
+								'center'        => __( 'Center', 'news-follow-buttons' ),
+								'flex-end'      => __( 'Right', 'news-follow-buttons' ),
+								'space-between' => __( 'Spread across the row', 'news-follow-buttons' ),
 							);
 							foreach ( $alignments as $value => $align_label ) :
 								?>
@@ -319,57 +319,57 @@ function fog_render_settings_page() {
 							<?php endforeach; ?>
 						</select>
 						<p class="description">
-							<?php esc_html_e( 'Alignment applies to every row, so a button pushed onto a second row follows the same alignment.', 'follow-on-google' ); ?>
+							<?php esc_html_e( 'Alignment applies to every row, so a button pushed onto a second row follows the same alignment.', 'news-follow-buttons' ); ?>
 						</p>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Wrapping', 'follow-on-google' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Wrapping', 'news-follow-buttons' ); ?></th>
 					<td>
 						<label>
 							<input type="checkbox"
-								name="<?php echo esc_attr( FOG_OPTION_NAME ); ?>[layout][allowWrap]"
+								name="<?php echo esc_attr( NFB_OPTION_NAME ); ?>[layout][allowWrap]"
 								value="1" <?php checked( $settings['layout']['allowWrap'] ); ?> />
-							<?php esc_html_e( 'Allow buttons to wrap onto multiple rows', 'follow-on-google' ); ?>
+							<?php esc_html_e( 'Allow buttons to wrap onto multiple rows', 'news-follow-buttons' ); ?>
 						</label>
 						<p class="description">
-							<?php esc_html_e( 'Uncheck to force all buttons onto a single row.', 'follow-on-google' ); ?>
+							<?php esc_html_e( 'Uncheck to force all buttons onto a single row.', 'news-follow-buttons' ); ?>
 						</p>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'If a single row overflows', 'follow-on-google' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'If a single row overflows', 'news-follow-buttons' ); ?></th>
 					<td>
-						<select name="<?php echo esc_attr( FOG_OPTION_NAME ); ?>[layout][wrapOverflow]">
+						<select name="<?php echo esc_attr( NFB_OPTION_NAME ); ?>[layout][wrapOverflow]">
 							<option value="scroll" <?php selected( $settings['layout']['wrapOverflow'], 'scroll' ); ?>>
-								<?php esc_html_e( 'Keep full size and scroll horizontally', 'follow-on-google' ); ?>
+								<?php esc_html_e( 'Keep full size and scroll horizontally', 'news-follow-buttons' ); ?>
 							</option>
 							<option value="shrink" <?php selected( $settings['layout']['wrapOverflow'], 'shrink' ); ?>>
-								<?php esc_html_e( 'Shrink the buttons to fit', 'follow-on-google' ); ?>
+								<?php esc_html_e( 'Shrink the buttons to fit', 'news-follow-buttons' ); ?>
 							</option>
 						</select>
 						<p class="description">
-							<?php esc_html_e( 'Only applies when wrapping is turned off.', 'follow-on-google' ); ?>
+							<?php esc_html_e( 'Only applies when wrapping is turned off.', 'news-follow-buttons' ); ?>
 						</p>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Links', 'follow-on-google' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Links', 'news-follow-buttons' ); ?></th>
 					<td>
 						<label>
 							<input type="checkbox"
-								name="<?php echo esc_attr( FOG_OPTION_NAME ); ?>[layout][openInNewTab]"
+								name="<?php echo esc_attr( NFB_OPTION_NAME ); ?>[layout][openInNewTab]"
 								value="1" <?php checked( $settings['layout']['openInNewTab'] ); ?> />
-							<?php esc_html_e( 'Open links in a new tab', 'follow-on-google' ); ?>
+							<?php esc_html_e( 'Open links in a new tab', 'news-follow-buttons' ); ?>
 						</label>
 					</td>
 				</tr>
 			</table>
 
-			<h2><?php esc_html_e( 'Buttons', 'follow-on-google' ); ?></h2>
+			<h2><?php esc_html_e( 'Buttons', 'news-follow-buttons' ); ?></h2>
 			<?php
 			foreach ( array( 'news', 'discover', 'preferred' ) as $key ) {
-				fog_render_button_fields( $key, $names[ $key ], $settings['buttons'][ $key ], $prefixes[ $key ] );
+				nfb_render_button_fields( $key, $names[ $key ], $settings['buttons'][ $key ], $prefixes[ $key ] );
 			}
 			?>
 

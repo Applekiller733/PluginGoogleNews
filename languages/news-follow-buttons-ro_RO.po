@@ -1,19 +1,19 @@
-# Romanian translation for Follow on Google Buttons.
+# Romanian translation for News Follow Buttons.
 # Copyright (C) 2026 Popa Zelu Andrei
 # This file is distributed under the same license as the plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Follow on Google Buttons 1.3.0\n"
-"Report-Msgid-Bugs-To: https://github.com/Applekiller733/PluginGoogleNews\n"
+"Project-Id-Version: News Follow Buttons 1.3.0\n"
+"Report-Msgid-Bugs-To: https://github.com/Applekiller733/news-follow-buttons\n"
 "PO-Revision-Date: 2026-08-09 12:00+0000\n"
-"Last-Translator: Popa Zelu Andrei applekiller733@gmail.com\n"
+"Last-Translator: Popa Zelu Andrei\n"
 "Language-Team: Romanian\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2);\n"
-"X-Domain: follow-on-google\n"
+"X-Domain: news-follow-buttons\n"
 
 
 #: includes/config.php:451
@@ -138,17 +138,17 @@ msgid "Extrabold (800)"
 msgstr "Extra-gros (800)"
 
 #: includes/settings.php:55
-msgid "Follow on Google"
-msgstr "Follow on Google"
+msgid "News Follow"
+msgstr "News Follow"
 
 #: includes/settings.php:54
 #: includes/settings.php:241
-msgid "Follow on Google Buttons"
-msgstr "Butoane Follow on Google"
+msgid "News Follow Buttons"
+msgstr "News Follow Buttons"
 
 #: includes/config.php:443
-msgid "Follow on Google Buttons:"
-msgstr "Butoane Follow on Google:"
+msgid "News Follow Buttons:"
+msgstr "News Follow Buttons:"
 
 #: includes/config.php:76
 msgid "Follow on Google Discover"
@@ -293,7 +293,7 @@ msgstr "Semi-gros (600)"
 msgid "Set as preferred source"
 msgstr "Setează ca sursă preferată"
 
-#: follow-on-google.php:90
+#: news-follow-buttons.php:90
 msgid "Settings"
 msgstr "Setări"
 

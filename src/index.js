@@ -1,7 +1,7 @@
 /**
- * Registers the Follow on Google Buttons block on the client.
+ * Registers the News Follow Buttons block on the client.
  *
- * @package FollowOnGoogle
+ * @package NewsFollowButtons
  */
 
 import { registerBlockType } from '@wordpress/blocks';

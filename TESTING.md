@@ -64,7 +64,7 @@ Work through these in the editor and on the published page. Each targets a
 specific behavior built into the plugin.
 
 **Basic rendering**
-- [ ] Add the "Follow on Google Buttons" block. It appears in the inserter.
+- [ ] Add the "News Follow Buttons" block. It appears in the inserter.
 - [ ] Enable each button, give each a valid URL (see below), and publish.
 - [ ] On the published page, all three buttons render and link correctly.
 
@@ -137,7 +137,7 @@ Then either:
 - From the CLI:
 
 ```bash
-npm run env:cli -- plugin check follow-on-google
+npm run env:cli -- plugin check news-follow-buttons
 ```
 
 Fix every **Error**. Review **Warnings** — some are advisory, but most are worth

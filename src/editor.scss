@@ -1,11 +1,11 @@
 /**
- * Editor-only styles for the Follow on Google Buttons block.
+ * Editor-only styles for the News Follow Buttons block.
  *
- * @package FollowOnGoogle
+ * @package NewsFollowButtons
  */
 
-.wp-block-follow-on-google-buttons {
-	.fog-empty {
+.wp-block-news-follow-buttons-buttons {
+	.nfb-empty {
 		margin: 0;
 		padding: 0.75rem 1rem;
 		border: 1px dashed #c3c4c7;
@@ -15,13 +15,13 @@
 	}
 
 	/* In the editor the buttons are non-clickable spans; mimic the look. */
-	.fog-button {
+	.nfb-button {
 		cursor: default;
 	}
 }
 
 // Icon picker in the block settings sidebar.
-.fog-icon-picker {
+.nfb-icon-picker {
 	margin-bottom: 16px;
 
 	&__label {

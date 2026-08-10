@@ -1,22 +1,22 @@
 /**
- * Front-end (and shared) styles for the Follow on Google Buttons block.
+ * Front-end (and shared) styles for the News Follow Buttons block.
  *
  * Per-button colors, font size, weight, and border are applied inline by
  * render.php (user-configurable). This stylesheet handles only structure,
  * layout, and interaction states.
  *
- * @package FollowOnGoogle
+ * @package NewsFollowButtons
  */
 
-.wp-block-follow-on-google-buttons {
-	&.fog-buttons {
+.wp-block-news-follow-buttons-buttons {
+	&.nfb-buttons {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.75rem;
 		align-items: center;
 	}
 
-	.fog-button {
+	.nfb-button {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.5rem;
@@ -39,7 +39,7 @@
 		}
 	}
 
-	.fog-button__icon {
+	.nfb-button__icon {
 		display: inline-flex;
 		align-items: center;
 	}
@@ -48,8 +48,8 @@
 
 // Admin-only notice shown when a button URL fails validation.
 // Never displayed to visitors (gated by capability check in render.php).
-.wp-block-follow-on-google-buttons {
-	.fog-admin-notice {
+.wp-block-news-follow-buttons-buttons {
+	.nfb-admin-notice {
 		flex-basis: 100%;
 		margin: 0 0 0.75rem;
 		padding: 0.75rem 1rem;
@@ -75,8 +75,8 @@
 }
 
 // Custom (media library) icons and no-wrap layout support.
-.wp-block-follow-on-google-buttons {
-	.fog-button__icon-img {
+.wp-block-news-follow-buttons-buttons {
+	.nfb-button__icon-img {
 		display: block;
 		width: auto;
 		height: 1.2em;
@@ -86,11 +86,11 @@
 
 	// When wrapping is disabled and "shrink to fit" is chosen, allow the
 	// buttons to compress and truncate their label rather than overflow.
-	.fog-button.is-shrink {
+	.nfb-button.is-shrink {
 		min-width: 0;
 		flex-shrink: 1;
 
-		.fog-button__label {
+		.nfb-button__label {
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
@@ -98,7 +98,7 @@
 	}
 
 	// Keep the scroll affordance from clipping focus outlines.
-	&.fog-buttons {
+	&.nfb-buttons {
 		scrollbar-width: thin;
 	}
 }
@@ -106,12 +106,12 @@
 // The stacked mobile layout must not fight an explicit no-wrap setting, so it
 // only applies when wrapping is allowed.
 @media ( max-width: 480px ) {
-	.wp-block-follow-on-google-buttons.fog-buttons[style*="flex-wrap:wrap"],
-	.wp-block-follow-on-google-buttons.fog-buttons[style*="flex-wrap: wrap"] {
+	.wp-block-news-follow-buttons-buttons.nfb-buttons[style*="flex-wrap:wrap"],
+	.wp-block-news-follow-buttons-buttons.nfb-buttons[style*="flex-wrap: wrap"] {
 		flex-direction: column;
 		align-items: stretch;
 
-		.fog-button {
+		.nfb-button {
 			justify-content: center;
 			width: 100%;
 		}

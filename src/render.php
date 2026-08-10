@@ -1,12 +1,12 @@
 <?php
 /**
- * Server-side render for the Follow on Google Buttons block.
+ * Server-side render for the News Follow Buttons block.
  *
  * This file maps the block's flat attributes onto the shared config shape and
- * delegates to fog_render_buttons(), so a block instance and an auto-inserted
+ * delegates to nfb_render_buttons(), so a block instance and an auto-inserted
  * instance produce identical markup.
  *
- * @package FollowOnGoogle
+ * @package NewsFollowButtons
  *
  * @var array    $attributes Block attributes.
  * @var string   $content    Block default content.
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$fog_config = array(
+$nfb_config = array(
 	'buttons' => array(
 		'news'      => array(
 			'enabled' => ! empty( $attributes['showNews'] ),
@@ -52,14 +52,14 @@ $fog_config = array(
 
 // Sanitize the layout first so the container style is safe to embed in the
 // wrapper attributes WordPress generates for us.
-$fog_clean  = fog_sanitize_config( $fog_config );
-$fog_styles = fog_build_container_style( $fog_clean['layout'] );
+$nfb_clean  = nfb_sanitize_config( $nfb_config );
+$nfb_styles = nfb_build_container_style( $nfb_clean['layout'] );
 
-$fog_wrapper_attributes = get_block_wrapper_attributes(
+$nfb_wrapper_attributes = get_block_wrapper_attributes(
 	array(
-		'class' => 'fog-buttons',
-		'style' => $fog_styles,
+		'class' => 'nfb-buttons',
+		'style' => $nfb_styles,
 	)
 );
 
-echo fog_render_buttons( $fog_config, $fog_wrapper_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fog_render_buttons() escapes all output internally.
+echo nfb_render_buttons( $nfb_config, $nfb_wrapper_attributes ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- nfb_render_buttons() escapes all output internally.

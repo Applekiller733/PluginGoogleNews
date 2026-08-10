@@ -16,7 +16,7 @@
 
 .nfb-settings .nfb-style-grid {
 	display: grid;
-	grid-template-columns: repeat( auto-fit, minmax( 180px, 1fr ) );
+	grid-template-columns: repeat( auto-fit, minmax( 200px, 1fr ) );
 	gap: 0 20px;
 }
 
@@ -40,7 +40,33 @@
 	display: block;
 }
 
-.nfb-settings .nfb-color-input {
+/* Only applies before wpColorPicker upgrades the field (or if Iris is missing). */
+.nfb-settings .nfb-color-input:not( .wp-color-picker ) {
 	width: 100%;
 	max-width: 160px;
+}
+
+.nfb-settings .nfb-color-field .wp-picker-container {
+	position: relative;
+	display: inline-block;
+}
+
+/* Drop the hex field under the swatch button so it fits a grid column. */
+.nfb-settings .nfb-color-field .wp-picker-input-wrap:not( .hidden ) {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-top: 6px;
+}
+
+.nfb-settings .nfb-color-field .wp-picker-input-wrap label {
+	margin: 0;
+}
+
+/* Overlay the Iris panel so opening one picker doesn't reflow the grid. */
+.nfb-settings .nfb-color-field .wp-picker-holder {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 20;
 }

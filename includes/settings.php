@@ -76,7 +76,7 @@ function nfb_enqueue_admin_assets( $hook ) {
 	wp_enqueue_script(
 		'nfb-admin',
 		plugins_url( 'admin/settings.js', NFB_PLUGIN_FILE ),
-		array( 'jquery' ),
+		array( 'jquery', 'wp-color-picker' ),
 		NFB_VERSION,
 		true
 	);
@@ -84,7 +84,7 @@ function nfb_enqueue_admin_assets( $hook ) {
 	wp_enqueue_style(
 		'nfb-admin',
 		plugins_url( 'admin/settings.css', NFB_PLUGIN_FILE ),
-		array(),
+		array( 'wp-color-picker' ),
 		NFB_VERSION
 	);
 
@@ -95,10 +95,32 @@ function nfb_enqueue_admin_assets( $hook ) {
 			'chooseIcon'  => __( 'Choose icon', 'news-follow-buttons' ),
 			'useIcon'     => __( 'Use this icon', 'news-follow-buttons' ),
 			'defaultIcon' => __( 'Default Google icon', 'news-follow-buttons' ),
+			'palette'     => nfb_get_color_palette(),
 		)
 	);
 }
 add_action( 'admin_enqueue_scripts', 'nfb_enqueue_admin_assets' );
+
+/**
+ * Swatches offered under every color picker.
+ *
+ * The first four are the palette the default buttons are built from, so the
+ * common tweaks are one click away.
+ *
+ * @return string[] Hex colors.
+ */
+function nfb_get_color_palette() {
+	return array(
+		'#1a73e8',
+		'#202124',
+		'#ffffff',
+		'#dadce0',
+		'#f8f9fa',
+		'#34a853',
+		'#ea4335',
+		'#fbbc04',
+	);
+}
 
 /**
  * Render one button's fieldset on the settings page.
@@ -171,14 +193,22 @@ function nfb_render_button_fields( $key, $title, $button, $prefix ) {
 			'textColor'   => __( 'Text color', 'news-follow-buttons' ),
 			'borderColor' => __( 'Border color', 'news-follow-buttons' ),
 		);
+
+		// Feeds each picker's "Default" button with this button's own defaults.
+		$default_config = nfb_get_default_config();
+		$default_style  = $default_config['buttons'][ $key ]['style'];
 		?>
 		<div class="nfb-style-grid">
-			<?php foreach ( $style_fields as $field => $field_label ) : ?>
-				<p>
-					<label><strong><?php echo esc_html( $field_label ); ?></strong></label><br />
-					<input type="text" class="nfb-color-input"
+			<?php
+			foreach ( $style_fields as $field => $field_label ) :
+				$field_id = $key . '-' . strtolower( $field );
+				?>
+				<p class="nfb-color-field">
+					<label for="<?php echo esc_attr( $field_id ); ?>"><strong><?php echo esc_html( $field_label ); ?></strong></label><br />
+					<input type="text" class="nfb-color-input" id="<?php echo esc_attr( $field_id ); ?>"
 						name="<?php echo esc_attr( $name_base ); ?>[style][<?php echo esc_attr( $field ); ?>]"
 						value="<?php echo esc_attr( $button['style'][ $field ] ); ?>"
+						data-default-color="<?php echo esc_attr( $default_style[ $field ] ); ?>"
 						placeholder="#000000" />
 				</p>
 			<?php endforeach; ?>

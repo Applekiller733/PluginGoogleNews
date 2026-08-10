@@ -87,6 +87,11 @@ specific behavior built into the plugin.
       border style. The editor preview updates live.
 - [ ] Publish and confirm the front end matches the preview.
 - [ ] Try an extreme value (font size at max, thick border). It stays sane.
+- [ ] On **Settings → News Follow**, open a color field. A swatch button opens
+      the color picker; pick from the wheel, a palette swatch, or type a hex
+      value. "Default" restores that button's original color.
+- [ ] Save and reopen the settings page. The chosen colors persist and the
+      front end matches.
 
 **Responsiveness**
 - [ ] Narrow the browser below ~480px (or use device emulation). Buttons stack

@@ -1,5 +1,5 @@
 /**
- * Settings page: media library icon picker.
+ * Settings page: media library icon picker and color pickers.
  *
  * @package NewsFollowButtons
  */
@@ -8,6 +8,18 @@
 
 	$( function () {
 		var frame = null;
+
+		// Swap the hex text fields for the core (Iris) color picker. Each input
+		// carries data-default-color, which wpColorPicker reads off the element
+		// to power its "Default" button.
+		if ( $.fn.wpColorPicker ) {
+			$( '.nfb-color-input' ).wpColorPicker( {
+				palettes:
+					window.nfbAdminL10n && window.nfbAdminL10n.palette
+						? window.nfbAdminL10n.palette
+						: true,
+			} );
+		}
 
 		$( '.nfb-choose-icon' ).on( 'click', function ( event ) {
 			event.preventDefault();

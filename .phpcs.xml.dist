@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="News Follow Buttons">
-	<description>Coding standards for the News Follow Buttons plugin.</description>
+<ruleset name="Publio Follow Buttons for Google News and Google Discover">
+	<description>Coding standards for the Publio Follow Buttons for Google News and Google Discover plugin.</description>
 
 	<!-- What to scan. -->
 	<file>.</file>
@@ -29,7 +29,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="array">
-				<element value="news-follow-buttons"/>
+				<element value="publio-follow-buttons-google-news-discover"/>
 			</property>
 		</properties>
 	</rule>

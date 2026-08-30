@@ -77,8 +77,8 @@ function nfb_enqueue_auto_insert_style() {
 
 	// The handle WordPress generates for the block's "style" field.
 	$handle = function_exists( 'generate_block_asset_handle' )
-		? generate_block_asset_handle( 'news-follow-buttons/buttons', 'style' )
-		: 'news-follow-buttons-buttons-style';
+		? generate_block_asset_handle( 'publio-follow-buttons-google-news-discover/buttons', 'style' )
+		: 'publio-follow-buttons-google-news-discover-buttons-style';
 
 	if ( wp_style_is( $handle, 'registered' ) ) {
 		wp_enqueue_style( $handle );

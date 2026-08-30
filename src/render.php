@@ -1,6 +1,6 @@
 <?php
 /**
- * Server-side render for the News Follow Buttons block.
+ * Server-side render for the Publio Follow Buttons block.
  *
  * This file maps the block's flat attributes onto the shared config shape and
  * delegates to nfb_render_buttons(), so a block instance and an auto-inserted

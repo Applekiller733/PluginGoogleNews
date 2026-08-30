@@ -1,5 +1,5 @@
 /**
- * Registers the News Follow Buttons block on the client.
+ * Registers the Publio Follow Buttons block on the client.
  *
  * @package NewsFollowButtons
  */

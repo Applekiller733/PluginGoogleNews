@@ -1,5 +1,5 @@
 /**
- * Editor component for the News Follow Buttons block.
+ * Editor component for the Publio Follow Buttons block.
  *
  * @package NewsFollowButtons
  */
@@ -49,20 +49,20 @@ function urlMatchesPrefix( url, prefix ) {
 }
 
 const FONT_WEIGHTS = [
-	{ label: __( 'Light (300)', 'news-follow-buttons' ), value: '300' },
-	{ label: __( 'Regular (400)', 'news-follow-buttons' ), value: '400' },
-	{ label: __( 'Medium (500)', 'news-follow-buttons' ), value: '500' },
-	{ label: __( 'Semibold (600)', 'news-follow-buttons' ), value: '600' },
-	{ label: __( 'Bold (700)', 'news-follow-buttons' ), value: '700' },
-	{ label: __( 'Extrabold (800)', 'news-follow-buttons' ), value: '800' },
+	{ label: __( 'Light (300)', 'publio-follow-buttons-google-news-discover' ), value: '300' },
+	{ label: __( 'Regular (400)', 'publio-follow-buttons-google-news-discover' ), value: '400' },
+	{ label: __( 'Medium (500)', 'publio-follow-buttons-google-news-discover' ), value: '500' },
+	{ label: __( 'Semibold (600)', 'publio-follow-buttons-google-news-discover' ), value: '600' },
+	{ label: __( 'Bold (700)', 'publio-follow-buttons-google-news-discover' ), value: '700' },
+	{ label: __( 'Extrabold (800)', 'publio-follow-buttons-google-news-discover' ), value: '800' },
 ];
 
 const BORDER_STYLES = [
-	{ label: __( 'Solid', 'news-follow-buttons' ), value: 'solid' },
-	{ label: __( 'Dashed', 'news-follow-buttons' ), value: 'dashed' },
-	{ label: __( 'Dotted', 'news-follow-buttons' ), value: 'dotted' },
-	{ label: __( 'Double', 'news-follow-buttons' ), value: 'double' },
-	{ label: __( 'None', 'news-follow-buttons' ), value: 'none' },
+	{ label: __( 'Solid', 'publio-follow-buttons-google-news-discover' ), value: 'solid' },
+	{ label: __( 'Dashed', 'publio-follow-buttons-google-news-discover' ), value: 'dashed' },
+	{ label: __( 'Dotted', 'publio-follow-buttons-google-news-discover' ), value: 'dotted' },
+	{ label: __( 'Double', 'publio-follow-buttons-google-news-discover' ), value: 'double' },
+	{ label: __( 'None', 'publio-follow-buttons-google-news-discover' ), value: 'none' },
 ];
 
 /**
@@ -98,7 +98,7 @@ function IconPicker( { iconKey, iconId, setAttributes } ) {
 	return (
 		<div className="nfb-icon-picker">
 			<p className="nfb-icon-picker__label">
-				<strong>{ __( 'Icon', 'news-follow-buttons' ) }</strong>
+				<strong>{ __( 'Icon', 'publio-follow-buttons-google-news-discover' ) }</strong>
 			</p>
 			{ iconUrl && (
 				<img
@@ -117,8 +117,8 @@ function IconPicker( { iconKey, iconId, setAttributes } ) {
 					render={ ( { open } ) => (
 						<Button variant="secondary" onClick={ open }>
 							{ iconId
-								? __( 'Replace icon', 'news-follow-buttons' )
-								: __( 'Choose icon', 'news-follow-buttons' ) }
+								? __( 'Replace icon', 'publio-follow-buttons-google-news-discover' )
+								: __( 'Choose icon', 'publio-follow-buttons-google-news-discover' ) }
 						</Button>
 					) }
 				/>
@@ -129,7 +129,7 @@ function IconPicker( { iconKey, iconId, setAttributes } ) {
 					isDestructive
 					onClick={ () => setAttributes( { [ iconKey ]: 0 } ) }
 				>
-					{ __( 'Use default', 'news-follow-buttons' ) }
+					{ __( 'Use default', 'publio-follow-buttons-google-news-discover' ) }
 				</Button>
 			) }
 		</div>
@@ -153,48 +153,48 @@ function StyleControls( { styleKey, style = {}, setAttributes } ) {
 	return (
 		<>
 			<PanelColorSettings
-				title={ __( 'Colors', 'news-follow-buttons' ) }
+				title={ __( 'Colors', 'publio-follow-buttons-google-news-discover' ) }
 				initialOpen={ false }
 				colorSettings={ [
 					{
 						value: style.bgColor,
 						onChange: ( value ) => set( 'bgColor', value ),
-						label: __( 'Background', 'news-follow-buttons' ),
+						label: __( 'Background', 'publio-follow-buttons-google-news-discover' ),
 					},
 					{
 						value: style.textColor,
 						onChange: ( value ) => set( 'textColor', value ),
-						label: __( 'Text', 'news-follow-buttons' ),
+						label: __( 'Text', 'publio-follow-buttons-google-news-discover' ),
 					},
 					{
 						value: style.borderColor,
 						onChange: ( value ) => set( 'borderColor', value ),
-						label: __( 'Border', 'news-follow-buttons' ),
+						label: __( 'Border', 'publio-follow-buttons-google-news-discover' ),
 					},
 				] }
 			/>
 			<RangeControl
-				label={ __( 'Font size (px)', 'news-follow-buttons' ) }
+				label={ __( 'Font size (px)', 'publio-follow-buttons-google-news-discover' ) }
 				value={ style.fontSize }
 				onChange={ ( value ) => set( 'fontSize', value ) }
 				min={ 8 }
 				max={ 72 }
 			/>
 			<SelectControl
-				label={ __( 'Font weight', 'news-follow-buttons' ) }
+				label={ __( 'Font weight', 'publio-follow-buttons-google-news-discover' ) }
 				value={ style.fontWeight }
 				options={ FONT_WEIGHTS }
 				onChange={ ( value ) => set( 'fontWeight', value ) }
 			/>
 			<RangeControl
-				label={ __( 'Border width (px)', 'news-follow-buttons' ) }
+				label={ __( 'Border width (px)', 'publio-follow-buttons-google-news-discover' ) }
 				value={ style.borderWidth }
 				onChange={ ( value ) => set( 'borderWidth', value ) }
 				min={ 0 }
 				max={ 12 }
 			/>
 			<SelectControl
-				label={ __( 'Border style', 'news-follow-buttons' ) }
+				label={ __( 'Border style', 'publio-follow-buttons-google-news-discover' ) }
 				value={ style.borderStyle }
 				options={ BORDER_STYLES }
 				onChange={ ( value ) => set( 'borderStyle', value ) }
@@ -223,7 +223,7 @@ function ButtonControls( {
 	return (
 		<PanelBody title={ title } initialOpen={ false }>
 			<ToggleControl
-				label={ __( 'Show this button', 'news-follow-buttons' ) }
+				label={ __( 'Show this button', 'publio-follow-buttons-google-news-discover' ) }
 				checked={ attributes[ showKey ] }
 				onChange={ ( value ) =>
 					setAttributes( { [ showKey ]: value } )
@@ -232,7 +232,7 @@ function ButtonControls( {
 			{ attributes[ showKey ] && (
 				<>
 					<TextControl
-						label={ __( 'URL', 'news-follow-buttons' ) }
+						label={ __( 'URL', 'publio-follow-buttons-google-news-discover' ) }
 						value={ attributes[ urlKey ] }
 						help={ urlHelp }
 						type="url"
@@ -251,13 +251,13 @@ function ButtonControls( {
 							>
 								{ __(
 									'This URL will be rejected on the front end. It must start with:',
-									'news-follow-buttons'
+									'publio-follow-buttons-google-news-discover'
 								) }{ ' ' }
 								<code>{ URL_PREFIXES[ showKey ] }</code>
 							</Notice>
 						) }
 					<TextControl
-						label={ __( 'Button label', 'news-follow-buttons' ) }
+						label={ __( 'Button label', 'publio-follow-buttons-google-news-discover' ) }
 						value={ attributes[ labelKey ] }
 						onChange={ ( value ) =>
 							setAttributes( { [ labelKey ]: value } )
@@ -357,36 +357,36 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<InspectorControls>
 				<PanelBody
-					title={ __( 'Layout', 'news-follow-buttons' ) }
+					title={ __( 'Layout', 'publio-follow-buttons-google-news-discover' ) }
 					initialOpen={ true }
 				>
 					<SelectControl
-						label={ __( 'Alignment', 'news-follow-buttons' ) }
+						label={ __( 'Alignment', 'publio-follow-buttons-google-news-discover' ) }
 						value={ alignment }
 						options={ [
 							{
-								label: __( 'Left', 'news-follow-buttons' ),
+								label: __( 'Left', 'publio-follow-buttons-google-news-discover' ),
 								value: 'flex-start',
 							},
 							{
-								label: __( 'Center', 'news-follow-buttons' ),
+								label: __( 'Center', 'publio-follow-buttons-google-news-discover' ),
 								value: 'center',
 							},
 							{
-								label: __( 'Right', 'news-follow-buttons' ),
+								label: __( 'Right', 'publio-follow-buttons-google-news-discover' ),
 								value: 'flex-end',
 							},
 							{
 								label: __(
 									'Spread across the row',
-									'news-follow-buttons'
+									'publio-follow-buttons-google-news-discover'
 								),
 								value: 'space-between',
 							},
 						] }
 						help={ __(
 							'Alignment applies to every row, so a button pushed onto a second row follows the same alignment.',
-							'news-follow-buttons'
+							'publio-follow-buttons-google-news-discover'
 						) }
 						onChange={ ( value ) =>
 							setAttributes( { alignment: value } )
@@ -395,12 +395,12 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ToggleControl
 						label={ __(
 							'Allow buttons to wrap onto multiple rows',
-							'news-follow-buttons'
+							'publio-follow-buttons-google-news-discover'
 						) }
 						checked={ allowWrap }
 						help={ __(
 							'Turn off to force all buttons onto a single row.',
-							'news-follow-buttons'
+							'publio-follow-buttons-google-news-discover'
 						) }
 						onChange={ ( value ) =>
 							setAttributes( { allowWrap: value } )
@@ -410,21 +410,21 @@ export default function Edit( { attributes, setAttributes } ) {
 						<SelectControl
 							label={ __(
 								'If the row overflows',
-								'news-follow-buttons'
+								'publio-follow-buttons-google-news-discover'
 							) }
 							value={ wrapOverflow }
 							options={ [
 								{
 									label: __(
 										'Scroll horizontally',
-										'news-follow-buttons'
+										'publio-follow-buttons-google-news-discover'
 									),
 									value: 'scroll',
 								},
 								{
 									label: __(
 										'Shrink buttons to fit',
-										'news-follow-buttons'
+										'publio-follow-buttons-google-news-discover'
 									),
 									value: 'shrink',
 								},
@@ -437,7 +437,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<ToggleControl
 						label={ __(
 							'Open links in a new tab',
-							'news-follow-buttons'
+							'publio-follow-buttons-google-news-discover'
 						) }
 						checked={ openInNewTab }
 						onChange={ ( value ) =>
@@ -447,7 +447,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				</PanelBody>
 
 				<ButtonControls
-					title={ __( 'Google News button', 'news-follow-buttons' ) }
+					title={ __( 'Google News button', 'publio-follow-buttons-google-news-discover' ) }
 					showKey="showNews"
 					urlKey="newsUrl"
 					labelKey="newsLabel"
@@ -455,13 +455,13 @@ export default function Edit( { attributes, setAttributes } ) {
 					iconKey="newsIconId"
 					urlHelp={ __(
 						'Your Google News publication URL from Publisher Center.',
-						'news-follow-buttons'
+						'publio-follow-buttons-google-news-discover'
 					) }
 					attributes={ attributes }
 					setAttributes={ setAttributes }
 				/>
 				<ButtonControls
-					title={ __( 'Google Discover button', 'news-follow-buttons' ) }
+					title={ __( 'Google Discover button', 'publio-follow-buttons-google-news-discover' ) }
 					showKey="showDiscover"
 					urlKey="discoverUrl"
 					labelKey="discoverLabel"
@@ -469,7 +469,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					iconKey="discoverIconId"
 					urlHelp={ __(
 						'Google Discover has no per-site follow URL. Point this at your News publication or a help page.',
-						'news-follow-buttons'
+						'publio-follow-buttons-google-news-discover'
 					) }
 					attributes={ attributes }
 					setAttributes={ setAttributes }
@@ -477,7 +477,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				<ButtonControls
 					title={ __(
 						'Preferred source button',
-						'news-follow-buttons'
+						'publio-follow-buttons-google-news-discover'
 					) }
 					showKey="showPreferred"
 					urlKey="preferredUrl"
@@ -486,7 +486,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					iconKey="preferredIconId"
 					urlHelp={ __(
 						'Preferred source is a user setting in Google Search. Link to a how-to or Google settings page.',
-						'news-follow-buttons'
+						'publio-follow-buttons-google-news-discover'
 					) }
 					attributes={ attributes }
 					setAttributes={ setAttributes }
@@ -498,7 +498,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					<p className="nfb-empty">
 						{ __(
 							'No buttons to show yet. Enable a button and enter a valid Google URL in the block settings.',
-							'news-follow-buttons'
+							'publio-follow-buttons-google-news-discover'
 						) }
 					</p>
 				) }

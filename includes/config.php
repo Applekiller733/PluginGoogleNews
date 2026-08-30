@@ -38,9 +38,9 @@ function nfb_get_url_prefixes() {
  */
 function nfb_get_button_names() {
 	return array(
-		'news'      => __( 'Google News', 'news-follow-buttons' ),
-		'discover'  => __( 'Google Discover', 'news-follow-buttons' ),
-		'preferred' => __( 'Preferred source', 'news-follow-buttons' ),
+		'news'      => __( 'Google News', 'publio-follow-buttons-google-news-discover' ),
+		'discover'  => __( 'Google Discover', 'publio-follow-buttons-google-news-discover' ),
+		'preferred' => __( 'Preferred source', 'publio-follow-buttons-google-news-discover' ),
 	);
 }
 
@@ -58,7 +58,7 @@ function nfb_get_default_config() {
 			'news'      => array(
 				'enabled' => true,
 				'url'     => '',
-				'label'   => __( 'Follow on Google News', 'news-follow-buttons' ),
+				'label'   => __( 'Follow on Google News', 'publio-follow-buttons-google-news-discover' ),
 				'iconId'  => 0,
 				'style'   => array(
 					'bgColor'     => '#1a73e8',
@@ -73,7 +73,7 @@ function nfb_get_default_config() {
 			'discover'  => array(
 				'enabled' => true,
 				'url'     => '',
-				'label'   => __( 'Follow on Google Discover', 'news-follow-buttons' ),
+				'label'   => __( 'Follow on Google Discover', 'publio-follow-buttons-google-news-discover' ),
 				'iconId'  => 0,
 				'style'   => array(
 					'bgColor'     => '#202124',
@@ -88,7 +88,7 @@ function nfb_get_default_config() {
 			'preferred' => array(
 				'enabled' => true,
 				'url'     => '',
-				'label'   => __( 'Set as preferred source', 'news-follow-buttons' ),
+				'label'   => __( 'Set as preferred source', 'publio-follow-buttons-google-news-discover' ),
 				'iconId'  => 0,
 				'style'   => array(
 					'bgColor'     => '#ffffff',
@@ -428,7 +428,7 @@ function nfb_render_buttons( $config, $wrapper_attributes = '' ) {
 	$target          = $config['layout']['openInNewTab'] ? ' target="_blank" rel="noopener noreferrer"' : '';
 
 	if ( '' === $wrapper_attributes ) {
-		$wrapper_attributes = 'class="wp-block-news-follow-buttons-buttons nfb-buttons" style="'
+		$wrapper_attributes = 'class="wp-block-publio-follow-buttons-google-news-discover-buttons nfb-buttons" style="'
 			. esc_attr( $container_style ) . '"';
 	}
 
@@ -440,15 +440,15 @@ function nfb_render_buttons( $config, $wrapper_attributes = '' ) {
 
 	if ( $is_editor && ! empty( $rejected ) ) {
 		$html .= '<div class="nfb-admin-notice" role="note"><strong>'
-			. esc_html__( 'News Follow Buttons:', 'news-follow-buttons' )
+			. esc_html__( 'Publio Follow Buttons:', 'publio-follow-buttons-google-news-discover' )
 			. '</strong> '
-			. esc_html__( 'These buttons are hidden because their URLs are not valid Google links. Only you (as an editor) can see this notice.', 'news-follow-buttons' )
+			. esc_html__( 'These buttons are hidden because their URLs are not valid Google links. Only you (as an editor) can see this notice.', 'publio-follow-buttons-google-news-discover' )
 			. '<ul>';
 		foreach ( $rejected as $bad ) {
 			$html .= '<li>' . wp_kses(
 				sprintf(
 					/* translators: 1: button name, 2: required URL prefix. */
-					__( '%1$s must start with %2$s', 'news-follow-buttons' ),
+					__( '%1$s must start with %2$s', 'publio-follow-buttons-google-news-discover' ),
 					'<strong>' . esc_html( $bad['name'] ) . '</strong>',
 					'<code>' . esc_html( $bad['prefix'] ) . '</code>'
 				),

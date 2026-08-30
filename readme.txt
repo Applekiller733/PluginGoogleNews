@@ -1,10 +1,10 @@
-=== News Follow Buttons ===
+=== Publio Follow Buttons for Google News and Google Discover ===
 Contributors: applekiller733
 Tags: follow button, news, block, gutenberg, publisher
 Requires at least: 6.4
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ A customizable block with buttons linking to Google News, Google Discover, and p
 
 == Description ==
 
-News Follow Buttons adds a Gutenberg block that displays up to three
+Publio Follow Buttons adds a Gutenberg block that displays up to three
 customizable call-to-action buttons:
 
 * **Follow on Google News** — links to your Google News publication so signed-in
@@ -72,7 +72,7 @@ This is the source distribution. The block must be compiled once before use.
    `/wp-content/plugins/`, or run `npm run plugin-zip` to produce a
    ready-to-install zip.
 4. Activate the plugin through the 'Plugins' screen.
-5. Edit any page or post, add the "News Follow Buttons" block, and configure
+5. Edit any page or post, add the "Publio Follow Buttons" block, and configure
    your URLs, labels, and styling in the block settings sidebar.
 
 For development, run `npm run start` to rebuild automatically on save.
@@ -93,7 +93,7 @@ button can only link them to the relevant Google page or your own instructions.
 
 = Can the buttons appear on every post without editing each one? =
 
-Yes. Go to Settings -> News Follow, configure the buttons once, tick
+Yes. Go to Settings -> Publio Follow, configure the buttons once, tick
 "Automatically add the buttons to content", choose a position and which post
 types it applies to. Blocks you place manually keep their own settings and are
 unaffected.
@@ -117,6 +117,14 @@ future release.
 2. The block settings sidebar with per-button controls.
 
 == Changelog ==
+
+= 1.4.0 =
+* Renamed the plugin to "Publio Follow Buttons for Google News and Google Discover"
+  (new text domain: publio-follow-buttons-google-news-discover).
+* Removed bundled translation (.po/.mo) files; translations are now delivered through
+  translate.wordpress.org.
+* Removed the manual load_plugin_textdomain() call (not needed for WordPress.org-hosted
+  plugins since WordPress 4.6).
 
 = 1.3.0 =
 * Added automatic insertion: buttons can be added before and/or after content
@@ -142,6 +150,10 @@ future release.
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.4.0 =
+Plugin renamed and its text domain updated; bundled translation files removed in favor of
+translate.wordpress.org.
 
 = 1.3.0 =
 Adds global auto-insertion, custom media-library icons, and single-row layout

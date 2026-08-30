@@ -64,7 +64,7 @@ Work through these in the editor and on the published page. Each targets a
 specific behavior built into the plugin.
 
 **Basic rendering**
-- [ ] Add the "News Follow Buttons" block. It appears in the inserter.
+- [ ] Add the "Publio Follow Buttons" block. It appears in the inserter.
 - [ ] Enable each button, give each a valid URL (see below), and publish.
 - [ ] On the published page, all three buttons render and link correctly.
 
@@ -87,7 +87,7 @@ specific behavior built into the plugin.
       border style. The editor preview updates live.
 - [ ] Publish and confirm the front end matches the preview.
 - [ ] Try an extreme value (font size at max, thick border). It stays sane.
-- [ ] On **Settings → News Follow**, open a color field. A swatch button opens
+- [ ] On **Settings → Publio Follow**, open a color field. A swatch button opens
       the color picker; pick from the wheel, a palette swatch, or type a hex
       value. "Default" restores that button's original color.
 - [ ] Save and reopen the settings page. The chosen colors persist and the
@@ -142,7 +142,7 @@ Then either:
 - From the CLI:
 
 ```bash
-npm run env:cli -- plugin check news-follow-buttons
+npm run env:cli -- plugin check publio-follow-buttons-google-news-discover
 ```
 
 Fix every **Error**. Review **Warnings** — some are advisory, but most are worth

@@ -51,10 +51,10 @@ add_action( 'admin_init', 'nfb_register_settings' );
  */
 function nfb_add_settings_page() {
 	add_options_page(
-		__( 'News Follow Buttons', 'news-follow-buttons' ),
-		__( 'News Follow', 'news-follow-buttons' ),
+		__( 'Publio Follow Buttons', 'publio-follow-buttons-google-news-discover' ),
+		__( 'Publio Follow', 'publio-follow-buttons-google-news-discover' ),
 		'manage_options',
-		'news-follow-buttons',
+		'publio-follow-buttons-google-news-discover',
 		'nfb_render_settings_page'
 	);
 }
@@ -67,7 +67,7 @@ add_action( 'admin_menu', 'nfb_add_settings_page' );
  * @return void
  */
 function nfb_enqueue_admin_assets( $hook ) {
-	if ( 'settings_page_news-follow-buttons' !== $hook ) {
+	if ( 'settings_page_publio-follow-buttons-google-news-discover' !== $hook ) {
 		return;
 	}
 
@@ -92,9 +92,9 @@ function nfb_enqueue_admin_assets( $hook ) {
 		'nfb-admin',
 		'nfbAdminL10n',
 		array(
-			'chooseIcon'  => __( 'Choose icon', 'news-follow-buttons' ),
-			'useIcon'     => __( 'Use this icon', 'news-follow-buttons' ),
-			'defaultIcon' => __( 'Default Google icon', 'news-follow-buttons' ),
+			'chooseIcon'  => __( 'Choose icon', 'publio-follow-buttons-google-news-discover' ),
+			'useIcon'     => __( 'Use this icon', 'publio-follow-buttons-google-news-discover' ),
+			'defaultIcon' => __( 'Default Google icon', 'publio-follow-buttons-google-news-discover' ),
 			'palette'     => nfb_get_color_palette(),
 		)
 	);
@@ -144,12 +144,12 @@ function nfb_render_button_fields( $key, $title, $button, $prefix ) {
 				<input type="checkbox"
 					name="<?php echo esc_attr( $name_base ); ?>[enabled]"
 					value="1" <?php checked( $button['enabled'] ); ?> />
-				<?php esc_html_e( 'Show this button', 'news-follow-buttons' ); ?>
+				<?php esc_html_e( 'Show this button', 'publio-follow-buttons-google-news-discover' ); ?>
 			</label>
 		</p>
 
 		<p>
-			<label for="<?php echo esc_attr( $key ); ?>-url"><strong><?php esc_html_e( 'URL', 'news-follow-buttons' ); ?></strong></label><br />
+			<label for="<?php echo esc_attr( $key ); ?>-url"><strong><?php esc_html_e( 'URL', 'publio-follow-buttons-google-news-discover' ); ?></strong></label><br />
 			<input type="url" class="regular-text" id="<?php echo esc_attr( $key ); ?>-url"
 				name="<?php echo esc_attr( $name_base ); ?>[url]"
 				value="<?php echo esc_attr( $button['url'] ); ?>" /><br />
@@ -157,7 +157,7 @@ function nfb_render_button_fields( $key, $title, $button, $prefix ) {
 				<?php
 				printf(
 					/* translators: %s: required URL prefix. */
-					esc_html__( 'Must start with %s', 'news-follow-buttons' ),
+					esc_html__( 'Must start with %s', 'publio-follow-buttons-google-news-discover' ),
 					'<code>' . esc_html( $prefix ) . '</code>'
 				);
 				?>
@@ -165,33 +165,33 @@ function nfb_render_button_fields( $key, $title, $button, $prefix ) {
 		</p>
 
 		<p>
-			<label for="<?php echo esc_attr( $key ); ?>-label"><strong><?php esc_html_e( 'Button label', 'news-follow-buttons' ); ?></strong></label><br />
+			<label for="<?php echo esc_attr( $key ); ?>-label"><strong><?php esc_html_e( 'Button label', 'publio-follow-buttons-google-news-discover' ); ?></strong></label><br />
 			<input type="text" class="regular-text" id="<?php echo esc_attr( $key ); ?>-label"
 				name="<?php echo esc_attr( $name_base ); ?>[label]"
 				value="<?php echo esc_attr( $button['label'] ); ?>" />
 		</p>
 
 		<p class="nfb-icon-field">
-			<strong><?php esc_html_e( 'Icon', 'news-follow-buttons' ); ?></strong><br />
+			<strong><?php esc_html_e( 'Icon', 'publio-follow-buttons-google-news-discover' ); ?></strong><br />
 			<span class="nfb-icon-preview">
 				<?php if ( $icon_url ) : ?>
 					<img src="<?php echo esc_url( $icon_url ); ?>" alt="" />
 				<?php else : ?>
-					<em><?php esc_html_e( 'Default Google icon', 'news-follow-buttons' ); ?></em>
+					<em><?php esc_html_e( 'Default Google icon', 'publio-follow-buttons-google-news-discover' ); ?></em>
 				<?php endif; ?>
 			</span>
 			<input type="hidden" class="nfb-icon-id"
 				name="<?php echo esc_attr( $name_base ); ?>[iconId]"
 				value="<?php echo esc_attr( $icon_id ); ?>" />
-			<button type="button" class="button nfb-choose-icon"><?php esc_html_e( 'Choose icon', 'news-follow-buttons' ); ?></button>
-			<button type="button" class="button nfb-clear-icon"><?php esc_html_e( 'Use default', 'news-follow-buttons' ); ?></button>
+			<button type="button" class="button nfb-choose-icon"><?php esc_html_e( 'Choose icon', 'publio-follow-buttons-google-news-discover' ); ?></button>
+			<button type="button" class="button nfb-clear-icon"><?php esc_html_e( 'Use default', 'publio-follow-buttons-google-news-discover' ); ?></button>
 		</p>
 
 		<?php
 		$style_fields = array(
-			'bgColor'     => __( 'Background color', 'news-follow-buttons' ),
-			'textColor'   => __( 'Text color', 'news-follow-buttons' ),
-			'borderColor' => __( 'Border color', 'news-follow-buttons' ),
+			'bgColor'     => __( 'Background color', 'publio-follow-buttons-google-news-discover' ),
+			'textColor'   => __( 'Text color', 'publio-follow-buttons-google-news-discover' ),
+			'borderColor' => __( 'Border color', 'publio-follow-buttons-google-news-discover' ),
 		);
 
 		// Feeds each picker's "Default" button with this button's own defaults.
@@ -214,14 +214,14 @@ function nfb_render_button_fields( $key, $title, $button, $prefix ) {
 			<?php endforeach; ?>
 
 			<p>
-				<label><strong><?php esc_html_e( 'Font size (px)', 'news-follow-buttons' ); ?></strong></label><br />
+				<label><strong><?php esc_html_e( 'Font size (px)', 'publio-follow-buttons-google-news-discover' ); ?></strong></label><br />
 				<input type="number" min="8" max="72"
 					name="<?php echo esc_attr( $name_base ); ?>[style][fontSize]"
 					value="<?php echo esc_attr( $button['style']['fontSize'] ); ?>" />
 			</p>
 
 			<p>
-				<label><strong><?php esc_html_e( 'Font weight', 'news-follow-buttons' ); ?></strong></label><br />
+				<label><strong><?php esc_html_e( 'Font weight', 'publio-follow-buttons-google-news-discover' ); ?></strong></label><br />
 				<select name="<?php echo esc_attr( $name_base ); ?>[style][fontWeight]">
 					<?php foreach ( array( '300', '400', '500', '600', '700', '800' ) as $weight ) : ?>
 						<option value="<?php echo esc_attr( $weight ); ?>" <?php selected( $button['style']['fontWeight'], $weight ); ?>>
@@ -232,14 +232,14 @@ function nfb_render_button_fields( $key, $title, $button, $prefix ) {
 			</p>
 
 			<p>
-				<label><strong><?php esc_html_e( 'Border width (px)', 'news-follow-buttons' ); ?></strong></label><br />
+				<label><strong><?php esc_html_e( 'Border width (px)', 'publio-follow-buttons-google-news-discover' ); ?></strong></label><br />
 				<input type="number" min="0" max="12"
 					name="<?php echo esc_attr( $name_base ); ?>[style][borderWidth]"
 					value="<?php echo esc_attr( $button['style']['borderWidth'] ); ?>" />
 			</p>
 
 			<p>
-				<label><strong><?php esc_html_e( 'Border style', 'news-follow-buttons' ); ?></strong></label><br />
+				<label><strong><?php esc_html_e( 'Border style', 'publio-follow-buttons-google-news-discover' ); ?></strong></label><br />
 				<select name="<?php echo esc_attr( $name_base ); ?>[style][borderStyle]">
 					<?php foreach ( array( 'solid', 'dashed', 'dotted', 'double', 'none' ) as $bstyle ) : ?>
 						<option value="<?php echo esc_attr( $bstyle ); ?>" <?php selected( $button['style']['borderStyle'], $bstyle ); ?>>
@@ -268,46 +268,46 @@ function nfb_render_settings_page() {
 	$names    = nfb_get_button_names();
 	?>
 	<div class="wrap nfb-settings">
-		<h1><?php esc_html_e( 'News Follow Buttons', 'news-follow-buttons' ); ?></h1>
+		<h1><?php esc_html_e( 'Publio Follow Buttons', 'publio-follow-buttons-google-news-discover' ); ?></h1>
 
 		<p class="description">
-			<?php esc_html_e( 'These settings control the buttons that are inserted automatically. Blocks you place manually keep their own settings.', 'news-follow-buttons' ); ?>
+			<?php esc_html_e( 'These settings control the buttons that are inserted automatically. Blocks you place manually keep their own settings.', 'publio-follow-buttons-google-news-discover' ); ?>
 		</p>
 
 		<form method="post" action="options.php">
 			<?php settings_fields( 'nfb_settings_group' ); ?>
 
-			<h2><?php esc_html_e( 'Automatic insertion', 'news-follow-buttons' ); ?></h2>
+			<h2><?php esc_html_e( 'Automatic insertion', 'publio-follow-buttons-google-news-discover' ); ?></h2>
 			<table class="form-table" role="presentation">
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Enable', 'news-follow-buttons' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Enable', 'publio-follow-buttons-google-news-discover' ); ?></th>
 					<td>
 						<label>
 							<input type="checkbox"
 								name="<?php echo esc_attr( NFB_OPTION_NAME ); ?>[autoInsert][enabled]"
 								value="1" <?php checked( $settings['autoInsert']['enabled'] ); ?> />
-							<?php esc_html_e( 'Automatically add the buttons to content', 'news-follow-buttons' ); ?>
+							<?php esc_html_e( 'Automatically add the buttons to content', 'publio-follow-buttons-google-news-discover' ); ?>
 						</label>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Position', 'news-follow-buttons' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Position', 'publio-follow-buttons-google-news-discover' ); ?></th>
 					<td>
 						<select name="<?php echo esc_attr( NFB_OPTION_NAME ); ?>[autoInsert][position]">
 							<option value="before" <?php selected( $settings['autoInsert']['position'], 'before' ); ?>>
-								<?php esc_html_e( 'Before the content', 'news-follow-buttons' ); ?>
+								<?php esc_html_e( 'Before the content', 'publio-follow-buttons-google-news-discover' ); ?>
 							</option>
 							<option value="after" <?php selected( $settings['autoInsert']['position'], 'after' ); ?>>
-								<?php esc_html_e( 'After the content', 'news-follow-buttons' ); ?>
+								<?php esc_html_e( 'After the content', 'publio-follow-buttons-google-news-discover' ); ?>
 							</option>
 							<option value="both" <?php selected( $settings['autoInsert']['position'], 'both' ); ?>>
-								<?php esc_html_e( 'Both before and after', 'news-follow-buttons' ); ?>
+								<?php esc_html_e( 'Both before and after', 'publio-follow-buttons-google-news-discover' ); ?>
 							</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Apply to', 'news-follow-buttons' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Apply to', 'publio-follow-buttons-google-news-discover' ); ?></th>
 					<td>
 						<?php
 						$public_types = get_post_types( array( 'public' => true ), 'objects' );
@@ -328,18 +328,18 @@ function nfb_render_settings_page() {
 				</tr>
 			</table>
 
-			<h2><?php esc_html_e( 'Layout', 'news-follow-buttons' ); ?></h2>
+			<h2><?php esc_html_e( 'Layout', 'publio-follow-buttons-google-news-discover' ); ?></h2>
 			<table class="form-table" role="presentation">
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Horizontal alignment', 'news-follow-buttons' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Horizontal alignment', 'publio-follow-buttons-google-news-discover' ); ?></th>
 					<td>
 						<select name="<?php echo esc_attr( NFB_OPTION_NAME ); ?>[layout][alignment]">
 							<?php
 							$alignments = array(
-								'flex-start'    => __( 'Left', 'news-follow-buttons' ),
-								'center'        => __( 'Center', 'news-follow-buttons' ),
-								'flex-end'      => __( 'Right', 'news-follow-buttons' ),
-								'space-between' => __( 'Spread across the row', 'news-follow-buttons' ),
+								'flex-start'    => __( 'Left', 'publio-follow-buttons-google-news-discover' ),
+								'center'        => __( 'Center', 'publio-follow-buttons-google-news-discover' ),
+								'flex-end'      => __( 'Right', 'publio-follow-buttons-google-news-discover' ),
+								'space-between' => __( 'Spread across the row', 'publio-follow-buttons-google-news-discover' ),
 							);
 							foreach ( $alignments as $value => $align_label ) :
 								?>
@@ -349,54 +349,54 @@ function nfb_render_settings_page() {
 							<?php endforeach; ?>
 						</select>
 						<p class="description">
-							<?php esc_html_e( 'Alignment applies to every row, so a button pushed onto a second row follows the same alignment.', 'news-follow-buttons' ); ?>
+							<?php esc_html_e( 'Alignment applies to every row, so a button pushed onto a second row follows the same alignment.', 'publio-follow-buttons-google-news-discover' ); ?>
 						</p>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Wrapping', 'news-follow-buttons' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Wrapping', 'publio-follow-buttons-google-news-discover' ); ?></th>
 					<td>
 						<label>
 							<input type="checkbox"
 								name="<?php echo esc_attr( NFB_OPTION_NAME ); ?>[layout][allowWrap]"
 								value="1" <?php checked( $settings['layout']['allowWrap'] ); ?> />
-							<?php esc_html_e( 'Allow buttons to wrap onto multiple rows', 'news-follow-buttons' ); ?>
+							<?php esc_html_e( 'Allow buttons to wrap onto multiple rows', 'publio-follow-buttons-google-news-discover' ); ?>
 						</label>
 						<p class="description">
-							<?php esc_html_e( 'Uncheck to force all buttons onto a single row.', 'news-follow-buttons' ); ?>
+							<?php esc_html_e( 'Uncheck to force all buttons onto a single row.', 'publio-follow-buttons-google-news-discover' ); ?>
 						</p>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'If a single row overflows', 'news-follow-buttons' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'If a single row overflows', 'publio-follow-buttons-google-news-discover' ); ?></th>
 					<td>
 						<select name="<?php echo esc_attr( NFB_OPTION_NAME ); ?>[layout][wrapOverflow]">
 							<option value="scroll" <?php selected( $settings['layout']['wrapOverflow'], 'scroll' ); ?>>
-								<?php esc_html_e( 'Keep full size and scroll horizontally', 'news-follow-buttons' ); ?>
+								<?php esc_html_e( 'Keep full size and scroll horizontally', 'publio-follow-buttons-google-news-discover' ); ?>
 							</option>
 							<option value="shrink" <?php selected( $settings['layout']['wrapOverflow'], 'shrink' ); ?>>
-								<?php esc_html_e( 'Shrink the buttons to fit', 'news-follow-buttons' ); ?>
+								<?php esc_html_e( 'Shrink the buttons to fit', 'publio-follow-buttons-google-news-discover' ); ?>
 							</option>
 						</select>
 						<p class="description">
-							<?php esc_html_e( 'Only applies when wrapping is turned off.', 'news-follow-buttons' ); ?>
+							<?php esc_html_e( 'Only applies when wrapping is turned off.', 'publio-follow-buttons-google-news-discover' ); ?>
 						</p>
 					</td>
 				</tr>
 				<tr>
-					<th scope="row"><?php esc_html_e( 'Links', 'news-follow-buttons' ); ?></th>
+					<th scope="row"><?php esc_html_e( 'Links', 'publio-follow-buttons-google-news-discover' ); ?></th>
 					<td>
 						<label>
 							<input type="checkbox"
 								name="<?php echo esc_attr( NFB_OPTION_NAME ); ?>[layout][openInNewTab]"
 								value="1" <?php checked( $settings['layout']['openInNewTab'] ); ?> />
-							<?php esc_html_e( 'Open links in a new tab', 'news-follow-buttons' ); ?>
+							<?php esc_html_e( 'Open links in a new tab', 'publio-follow-buttons-google-news-discover' ); ?>
 						</label>
 					</td>
 				</tr>
 			</table>
 
-			<h2><?php esc_html_e( 'Buttons', 'news-follow-buttons' ); ?></h2>
+			<h2><?php esc_html_e( 'Buttons', 'publio-follow-buttons-google-news-discover' ); ?></h2>
 			<?php
 			foreach ( array( 'news', 'discover', 'preferred' ) as $key ) {
 				nfb_render_button_fields( $key, $names[ $key ], $settings['buttons'][ $key ], $prefixes[ $key ] );

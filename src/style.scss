@@ -1,5 +1,5 @@
 /**
- * Front-end (and shared) styles for the News Follow Buttons block.
+ * Front-end (and shared) styles for the Publio Follow Buttons block.
  *
  * Per-button colors, font size, weight, and border are applied inline by
  * render.php (user-configurable). This stylesheet handles only structure,
@@ -8,7 +8,7 @@
  * @package NewsFollowButtons
  */
 
-.wp-block-news-follow-buttons-buttons {
+.wp-block-publio-follow-buttons-google-news-discover-buttons {
 	&.nfb-buttons {
 		display: flex;
 		flex-wrap: wrap;
@@ -48,7 +48,7 @@
 
 // Admin-only notice shown when a button URL fails validation.
 // Never displayed to visitors (gated by capability check in render.php).
-.wp-block-news-follow-buttons-buttons {
+.wp-block-publio-follow-buttons-google-news-discover-buttons {
 	.nfb-admin-notice {
 		flex-basis: 100%;
 		margin: 0 0 0.75rem;
@@ -75,7 +75,7 @@
 }
 
 // Custom (media library) icons and no-wrap layout support.
-.wp-block-news-follow-buttons-buttons {
+.wp-block-publio-follow-buttons-google-news-discover-buttons {
 	.nfb-button__icon-img {
 		display: block;
 		width: auto;
@@ -106,8 +106,8 @@
 // The stacked mobile layout must not fight an explicit no-wrap setting, so it
 // only applies when wrapping is allowed.
 @media ( max-width: 480px ) {
-	.wp-block-news-follow-buttons-buttons.nfb-buttons[style*="flex-wrap:wrap"],
-	.wp-block-news-follow-buttons-buttons.nfb-buttons[style*="flex-wrap: wrap"] {
+	.wp-block-publio-follow-buttons-google-news-discover-buttons.nfb-buttons[style*="flex-wrap:wrap"],
+	.wp-block-publio-follow-buttons-google-news-discover-buttons.nfb-buttons[style*="flex-wrap: wrap"] {
 		flex-direction: column;
 		align-items: stretch;
 

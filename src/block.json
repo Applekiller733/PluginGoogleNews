@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "news-follow-buttons/buttons",
-	"version": "1.3.0",
-	"title": "News Follow Buttons",
+	"name": "publio-follow-buttons-google-news-discover/buttons",
+	"version": "1.4.0",
+	"title": "Publio Follow Buttons",
 	"category": "widgets",
 	"icon": "external",
 	"description": "A row of customizable buttons linking to Google News, Google Discover, and preferred-source settings.",
@@ -118,7 +118,7 @@
 			}
 		}
 	},
-	"textdomain": "news-follow-buttons",
+	"textdomain": "publio-follow-buttons-google-news-discover",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
